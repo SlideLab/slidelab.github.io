@@ -1,0 +1,66 @@
+/* ============================================================
+   SlideLab — design tokens.
+   The palette is taken from Figure 1: indigo for the agents,
+   green for the flow between them.
+   ============================================================ */
+
+:root {
+  --page: #f2f1ee;
+  --paper: #fbfaf8;
+  --paper-deep: #e6e4de;
+  --surface-1: #ecebe6;
+  --surface-2: #fbfaf8;
+
+  --ink: #17181b;
+  --ink-soft: #4e5057;
+  --ink-faint: #74767d;
+  --ink-ghost: #a2a4aa;
+  --rule: #d6d4cd;
+  --rule-mid: #b5b3ab;
+  --rule-strong: #34363a;
+
+  --signal: #4436c8;
+  --signal-dark: #2f238f;
+  --signal-soft: #7a6ee4;
+  --signal-wash: #e2dff5;
+  --secondary: #1c7a4a;
+  --secondary-dark: #125633;
+  --secondary-wash: #dbeae1;
+  --link: #3b2eb0;
+  --link-hover: #241a78;
+  --link-wash: #e2dff5;
+
+  --ours: #4436c8;
+  --other: #74767d;
+  --warn: #b0442c;
+
+  --serif: "STIX Two Text", Georgia, serif;
+  --sans: "IBM Plex Sans", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, monospace;
+  --display: "Space Grotesk", "IBM Plex Sans", Arial, sans-serif;
+  --numerals: "Fraunces", Georgia, serif;
+
+  --t-display: clamp(2.35rem, 3.7vw, 4rem);
+  --t-h2: clamp(1.75rem, 2.35vw, 2.35rem);
+  --t-h3: 1.25rem;
+  --t-lead: clamp(1.05rem, 1.3vw, 1.25rem);
+  --t-body: 1rem;
+  --t-small: 0.9rem;
+  --t-meta: 0.8rem;
+  --t-micro: 0.72rem;
+  --lh-display: 0.99;
+  --lh-tight: 1.12;
+  --lh-body: 1.58;
+
+  --page-max: 1480px;
+  --content-max: 1220px;
+  --narrow-max: 720px;
+  --fig-max: 780px;
+  --measure: 62ch;
+  --gutter: clamp(1.1rem, 4vw, 4.5rem);
+
+  --radius-sm: 0;
+  --shadow-paper: 0 1px 0 rgba(23, 24, 27, 0.08), 0 14px 34px rgba(23, 24, 27, 0.07);
+  --dur: 180ms;
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}

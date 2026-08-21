@@ -1,0 +1,424 @@
+/* ============================================================
+   SlideLab — layout.
+   A masthead that behaves as a running head, then numbered
+   chapters. Section-specific rules live in sections.css.
+   ============================================================ */
+
+.page { width: 100%; min-height: 100vh; margin: 0; padding: 0; }
+
+/* ---------- masthead ---------- */
+
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--paper) 94%, var(--paper-deep));
+  box-shadow: 0 7px 22px rgba(23, 24, 27, 0.075);
+  backdrop-filter: blur(14px);
+  transition: background-color 240ms var(--ease), box-shadow 240ms var(--ease);
+}
+
+.masthead.is-detached {
+  background: color-mix(in srgb, var(--paper) 98%, transparent);
+  box-shadow: 0 12px 32px rgba(23, 24, 27, 0.14);
+}
+
+.masthead-inner {
+  width: min(100%, var(--page-max));
+  height: 4.7rem;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  transition: height 240ms var(--ease);
+}
+
+@media (min-width: 1101px) {
+  .masthead.is-detached .masthead-inner { height: 4.25rem; }
+}
+
+.masthead-name {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  border: 0;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+/* a slide, drawn as a mark */
+.masthead-mark {
+  display: inline-block;
+  width: 1.15rem;
+  height: 0.78rem;
+  border: 1.5px solid var(--signal);
+  border-top-width: 4px;
+  transform: translateY(-0.02rem);
+}
+
+.masthead-nav {
+  grid-column: 2;
+  justify-self: center;
+  display: flex;
+  align-items: baseline;
+  gap: clamp(1.1rem, 2.2vw, 2.4rem);
+}
+
+.masthead-nav a {
+  position: relative;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.36rem;
+  border: 0;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.15;
+  white-space: nowrap;
+}
+
+.masthead-nav-number {
+  color: var(--signal);
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  transform: translateY(-0.35rem);
+}
+
+.masthead-nav-short { display: none; }
+
+.masthead-nav a::after {
+  content: "";
+  position: absolute;
+  left: 1.5rem;
+  bottom: -0.55rem;
+  width: 1.3rem;
+  height: 2px;
+  background: var(--signal);
+  opacity: 0;
+  transform: scaleX(0.45);
+  transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
+}
+
+.masthead-nav a:hover,
+.masthead-nav a.is-active { color: var(--ink); }
+.masthead-nav a.is-active { font-weight: 600; }
+.masthead-nav a:hover::after,
+.masthead-nav a.is-active::after { opacity: 1; transform: scaleX(1); }
+.masthead-nav a:focus-visible { outline: 2px solid var(--signal); outline-offset: 6px; }
+
+.masthead-paper {
+  grid-column: 3;
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.66rem 0.92rem;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: var(--ink);
+  box-shadow: 0 3px 0 var(--signal);
+  color: var(--paper);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.masthead-paper span { color: var(--signal-soft); }
+
+.masthead-paper:hover {
+  border-color: var(--signal-dark);
+  background: var(--signal-dark);
+  box-shadow: 0 4px 0 var(--signal);
+  color: var(--paper);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 1100px) {
+  .masthead-inner {
+    height: 7rem;
+    grid-template-rows: 3.75rem 3.25rem;
+  }
+  .masthead-name { grid-column: 1; grid-row: 1; }
+  .masthead-paper { grid-column: 3; grid-row: 1; }
+  .masthead-nav {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+    align-self: start;
+    padding-top: 0.35rem;
+  }
+  .research-chapter { scroll-margin-top: 7rem; }
+}
+
+@media (max-width: 600px) {
+  .masthead-inner { height: 6.6rem; grid-template-rows: 3.55rem 3.05rem; padding-inline: 1rem; }
+  .masthead-nav { gap: 0.35rem; }
+  .masthead-nav a { gap: 0.22rem; font-size: 0.88rem; }
+  .masthead-nav-full { display: none; }
+  .masthead-nav-short { display: inline; }
+  .masthead-nav a::after { left: 0.9rem; bottom: -0.45rem; }
+  .masthead-paper { padding: 0.55rem 0.7rem; font-size: 0.8rem; }
+  .research-chapter { scroll-margin-top: 6.6rem; }
+}
+
+/* ---------- chapters ---------- */
+
+.research-chapter {
+  padding: clamp(3.25rem, 6vh, 4.75rem) var(--gutter);
+  scroll-margin-top: 4.7rem;
+}
+
+.chapter-inner {
+  width: min(100%, var(--content-max));
+  margin: 0 auto;
+}
+
+.chapter-index {
+  margin: 0 0 1.3rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  color: var(--ink-soft);
+  font-family: var(--display);
+  font-size: 0.82rem;
+  font-weight: 550;
+}
+
+.chapter-index span:first-child {
+  color: var(--signal);
+  font-family: var(--numerals);
+  font-size: 1.45rem;
+  font-weight: 540;
+  font-variation-settings: "SOFT" 75, "WONK" 1, "opsz" 48;
+  letter-spacing: -0.04em;
+}
+
+.chapter-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
+  column-gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: end;
+  margin-bottom: clamp(1.75rem, 3.5vh, 2.5rem);
+}
+
+.chapter-head h2 {
+  max-width: 24ch;
+  color: var(--ink);
+  font-size: clamp(1.9rem, 2.5vw, 2.4rem);
+  font-weight: 540;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
+}
+
+.chapter-head > p {
+  max-width: 52ch;
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1rem;
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .chapter-head { grid-template-columns: 1fr; gap: 0.95rem; }
+  .chapter-head h2 { max-width: 32ch; }
+  .chapter-head > p { max-width: 64ch; }
+}
+
+@media (max-width: 600px) {
+  .research-chapter { padding-inline: 1rem; }
+  .chapter-head h2 { font-size: clamp(1.7rem, 7.5vw, 2.1rem); }
+}
+
+/* ---------- the drawer that holds the deeper material ---------- */
+
+.evidence-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  width: fit-content;
+  padding: 0.72rem 0.9rem;
+  border: 1px solid var(--ink);
+  border-radius: 2px;
+  background: var(--ink);
+  box-shadow: 0 3px 0 var(--signal);
+  color: var(--paper);
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1;
+  cursor: pointer;
+  text-align: left;
+}
+
+.evidence-trigger span:last-child { color: var(--signal-soft); font-size: 1rem; }
+
+.evidence-trigger:hover {
+  border-color: var(--signal-dark);
+  background: var(--signal-dark);
+  box-shadow: 0 4px 0 var(--signal);
+  transform: translateY(-1px);
+}
+
+.evidence-trigger:focus-visible { outline: 2px solid var(--signal); outline-offset: 5px; }
+
+.evidence-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.evidence-dialog::backdrop { background: rgba(16, 17, 15, 0.58); }
+
+.evidence-sheet {
+  width: min(1080px, 95vw);
+  min-height: 100%;
+  margin-left: auto;
+  padding: clamp(1.25rem, 4vw, 3.5rem);
+  background: var(--paper);
+  box-shadow: -20px 0 70px rgba(0, 0, 0, 0.22);
+  overflow: auto;
+  color-scheme: light;
+}
+
+.evidence-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--rule-mid);
+}
+
+.evidence-head h2 {
+  margin-top: 0.45rem;
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  letter-spacing: -0.04em;
+}
+
+.evidence-close {
+  flex: 0 0 auto;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--ink-faint);
+  background: transparent;
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.evidence-close:hover { border-color: var(--ink); background: var(--surface-1); }
+
+.evidence-tabs {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  border-bottom: 1px solid var(--rule);
+}
+
+.evidence-tabs button {
+  padding: 1rem 0 0.75rem;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.evidence-tabs button:hover { color: var(--ink); }
+.evidence-tabs button[aria-selected="true"] { border-bottom-color: var(--signal); color: var(--ink); font-weight: 600; }
+
+.evidence-content { padding-top: clamp(1.25rem, 3vw, 2.25rem); }
+
+.evidence-prose {
+  max-width: 70ch;
+  font-family: var(--serif);
+  font-size: 1.02rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+}
+.evidence-prose h3 {
+  margin: 1.9rem 0 0.65rem;
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+}
+.evidence-prose p { margin-bottom: 1rem; }
+.evidence-prose > p:first-child { margin-top: 0; }
+
+.drawer-intro {
+  max-width: 68ch;
+  margin: 0 0 1.5rem;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .evidence-sheet { width: 100%; padding: 1rem; }
+  .evidence-head { gap: 1rem; }
+}
+
+/* ---------- colophon ---------- */
+
+.colophon {
+  padding: clamp(3rem, 7vw, 5.5rem) var(--gutter);
+  border-top: 3px solid var(--signal);
+  background: #101113;
+  color: #d4d2cb;
+}
+
+.colophon-inner { width: min(100%, var(--content-max)); margin: 0 auto; }
+
+.colophon-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(240px, 0.65fr);
+  gap: clamp(2.5rem, 8vw, 7rem);
+}
+
+.colophon .eyebrow { color: var(--signal-soft); }
+.colophon h2 { margin: 0.5rem 0 1.2rem; color: #f4f2ed; font-size: 2rem; }
+.colophon a { color: #f4f2ed; border-bottom-color: #4b4d52; }
+.colophon a:hover { border-bottom-color: #f4f2ed; }
+
+.bibtex {
+  width: 100%;
+  margin: 0;
+  padding: 1rem;
+  overflow-x: auto;
+  border: 1px solid #34363a;
+  background: transparent;
+  color: #d4d2cb;
+  font: 0.68rem/1.55 var(--mono);
+}
+
+.colophon-note {
+  max-width: 66ch;
+  margin-top: 1rem;
+  color: #979590;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
+
+.colophon-facts { border-top: 1px solid #4b4d52; }
+.colophon-fact { padding: 0.9rem 0; border-bottom: 1px solid #34363a; }
+.colophon-fact .label { color: #979590; }
+.colophon-fact p { margin: 0.35rem 0 0; color: #d4d2cb; font-size: 0.78rem; line-height: 1.5; }
+
+@media (max-width: 800px) { .colophon-grid { grid-template-columns: 1fr; } }

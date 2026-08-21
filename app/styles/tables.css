@@ -1,0 +1,95 @@
+/* ============================================================
+   Tables — booktabs, the way the paper sets them. A top rule,
+   one rule under the header, a bottom rule. No row lines, no
+   vertical rules, no zebra striping.
+   ============================================================ */
+
+table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--sans);
+  font-size: var(--t-meta);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+table.tbl caption {
+  caption-side: top;
+  padding-bottom: 0.85rem;
+  color: var(--ink-soft);
+  font-size: var(--t-meta);
+  line-height: 1.55;
+  text-align: left;
+}
+
+table.tbl caption strong { color: var(--ink); }
+
+table.tbl thead th {
+  padding: 0.4rem 0.55rem;
+  border-bottom: 1px solid var(--rule-strong);
+  color: var(--ink);
+  font-weight: 600;
+  text-align: right;
+  white-space: nowrap;
+}
+
+table.tbl thead tr:first-child th {
+  padding-top: 0.55rem;
+  border-top: 1.5px solid var(--rule-strong);
+}
+
+/* a spanning header above a group of columns, with a rule under
+   the span only — \cmidrule */
+table.tbl thead th.span {
+  border-bottom: 1px solid var(--rule-mid);
+  color: var(--ink-soft);
+  font-size: var(--t-micro);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+table.tbl thead th.no-rule { border-bottom: 0; }
+
+table.tbl th:first-child,
+table.tbl td:first-child {
+  padding-left: 0;
+  text-align: left;
+}
+table.tbl th:last-child,
+table.tbl td:last-child { padding-right: 0; }
+
+table.tbl tbody td {
+  padding: 0.38rem 0.55rem;
+  border-bottom: 0;
+  color: var(--ink-soft);
+  text-align: right;
+}
+
+table.tbl tbody td:first-child { color: var(--ink); white-space: nowrap; }
+table.tbl tbody tr:last-child td {
+  padding-bottom: 0.55rem;
+  border-bottom: 1.5px solid var(--rule-strong);
+}
+
+/* the midrule that separates our system from the baselines */
+table.tbl tbody tr.rule-above td { border-top: 1px solid var(--rule-mid); padding-top: 0.6rem; }
+
+table.tbl tbody tr.ours td { color: var(--ink); font-weight: 600; }
+table.tbl tbody tr.ours td:first-child { color: var(--signal-dark); }
+table.tbl .best { color: var(--ink); font-weight: 600; }
+table.tbl .none { color: var(--ink-ghost); }
+
+/* detection marks, matching the paper's check / cross / circle */
+.mark-yes { color: var(--secondary-dark); font-weight: 600; }
+.mark-no { color: var(--warn); font-weight: 600; }
+.mark-none { color: var(--ink-ghost); }
+
+.tbl-scroll { margin: 0; overflow-x: auto; }
+.tbl-scroll table.tbl { min-width: 34rem; }
+
+.tbl-note {
+  margin: 0.85rem 0 0;
+  color: var(--ink-faint);
+  font-size: var(--t-micro);
+  line-height: 1.55;
+}
