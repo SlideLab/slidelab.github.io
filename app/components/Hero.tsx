@@ -9,11 +9,6 @@ export default function Hero() {
         <h1 className="hero-title">{site.title}</h1>
         <AuthorPreviews authors={site.authors} />
 
-        {/* The framing, taken from the opening of the paper. */}
-        <p className="hero-question">
-          A conference talk gives an author 10 to 15 minutes to communicate what a paper
-          develops over eight pages.
-        </p>
         <p className="hero-lead">
           We present SlideLab, a training-free multi-agent framework that generates
           scientific presentations from research papers, and ConfArena, an evaluation
