@@ -1,6 +1,6 @@
 import { site } from "../site.config";
 import AuthorPreviews from "./AuthorPreviews";
-import PreferenceArtifact from "./figures/PreferenceArtifact";
+import DeckForge from "./DeckForge";
 
 export default function Hero() {
   return (
@@ -27,7 +27,7 @@ export default function Hero() {
         </div>
       </div>
 
-      <PreferenceArtifact />
+      <DeckForge />
     </header>
   );
 }
