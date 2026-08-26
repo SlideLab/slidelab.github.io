@@ -372,13 +372,12 @@ export default function DeckForge() {
         ) : (
           <>
             <div className="df-intro">
-              <p className="df-q">Turn a paper into a deck.</p>
-              <p className="df-sub">Add the paper. We&rsquo;ll handle the slides.</p>
+              <p className="df-q">Your paper. <em>As a deck.</em></p>
             </div>
 
             <div className={`df-source-picker${hasPaper ? " has-paper" : ""}`}>
               <div className={`df-field${shake ? " is-error" : ""}`}>
-                <label className="df-label" htmlFor="df-paper">Paper</label>
+                <label className="df-sr-only" htmlFor="df-paper">arXiv URL or ID</label>
                 {pdf ? (
                   <div className="df-pdfchoice">
                     <span className="df-pdfname">{pdfTitle || pdf.name}</span>
@@ -397,7 +396,7 @@ export default function DeckForge() {
                         (document.getElementById("df-email") as HTMLInputElement)?.focus();
                       }
                     }}
-                    placeholder="arXiv URL or ID"
+                    placeholder="Paste an arXiv link"
                     spellCheck={false}
                     autoComplete="off"
                   />
@@ -410,16 +409,19 @@ export default function DeckForge() {
                 )}
               </div>
               {!hasPaper && (
-                <button className="df-pdfbtn" type="button" onClick={() => fileRef.current?.click()}>
-                  <span aria-hidden="true">↥</span> Upload PDF
-                </button>
+                <>
+                  <span className="df-choice-word">or</span>
+                  <button className="df-pdfbtn" type="button" onClick={() => fileRef.current?.click()}>
+                    Upload a PDF <span aria-hidden="true">↥</span>
+                  </button>
+                </>
               )}
             </div>
 
             {hasPaper && (
               <div className="df-reveal">
-                <p className="df-payoff">~14 slides · ~10 min · delivered by email</p>
-                <label className="df-label" htmlFor="df-email">Delivery email</label>
+                <p className="df-delivery-prompt">Send the finished deck to</p>
+                <label className="df-sr-only" htmlFor="df-email">Delivery email</label>
                 <input
                   id="df-email"
                   className="df-email"
@@ -427,17 +429,18 @@ export default function DeckForge() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onKeyDown={(e) => { if (e.key === "Enter") generate(); }}
-                  placeholder="where do we send it?"
+                  placeholder="name@institution.edu"
                   spellCheck={false}
                   autoComplete="email"
                 />
+                <p className="df-payoff">~14 slides · ready in about 10 minutes</p>
               </div>
             )}
 
             {hasPaper && (
               <div className="df-actions">
                 <button className="df-go" type="button" onClick={generate} disabled={!canGen}>
-                  Forge deck <span className="df-go-arrow" aria-hidden="true">→</span>
+                  Generate my deck <span className="df-go-arrow" aria-hidden="true">→</span>
                 </button>
               </div>
             )}

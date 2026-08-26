@@ -19,14 +19,14 @@ export default function Hero() {
           <a className="primary-link" href={site.links.paper}>
             Read the paper <span aria-hidden="true">&#8599;</span>
           </a>
+          <a className="primary-link annotation-cta" href={site.links.annotation} target="_blank" rel="noreferrer">
+            Rate decks <span aria-hidden="true">&#8599;</span>
+          </a>
           {site.links.code ? (
             <a href={site.links.code}>Code</a>
           ) : (
             <span>Code &middot; {site.release.code}</span>
           )}
-          <a href={site.links.annotation} target="_blank" rel="noreferrer">
-            Rate decks <span aria-hidden="true">&#8599;</span>
-          </a>
         </div>
       </div>
 

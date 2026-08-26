@@ -47,7 +47,7 @@
   padding: 0.08rem 0.04rem 0.18rem;
   border-bottom: 0;
   color: var(--ink-soft);
-  font-size: 1rem;
+  font-size: 1.05rem;
   cursor: zoom-in;
 }
 
@@ -120,7 +120,7 @@
   display: flex;
   align-items: center;
   gap: 1.2rem;
-  font-size: 0.78rem;
+  font-size: 1rem;
 }
 
 .hero-links .primary-link {
@@ -133,9 +133,21 @@
   background: var(--ink);
   box-shadow: 0 3px 0 var(--signal);
   color: var(--paper);
-  font-size: 0.88rem;
+  font-size: 1rem;
   font-weight: 600;
   line-height: 1;
+}
+
+.hero-links .annotation-cta {
+  border-color: var(--signal);
+  background: var(--signal);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+.hero-links .annotation-cta:hover {
+  border-color: var(--signal-dark);
+  background: var(--signal-dark);
+  box-shadow: 0 4px 0 var(--ink);
 }
 
 .hero-links .primary-link span { color: var(--signal-soft); font-size: 1rem; }

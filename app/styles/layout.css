@@ -125,10 +125,10 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.66rem 0.92rem;
-  border: 1px solid var(--ink);
-  border-radius: 2px;
-  font-size: 0.88rem;
+  padding: 0.35rem 0.15rem;
+  border: 0;
+  border-radius: 0;
+  font-size: 1.05rem;
   font-weight: 600;
   line-height: 1;
   white-space: nowrap;
@@ -140,25 +140,23 @@
 }
 
 .masthead-annotate {
-  background: var(--ink);
-  box-shadow: 0 3px 0 var(--signal);
-  color: var(--paper);
+  background: transparent;
+  box-shadow: none;
+  color: var(--signal-dark);
 }
 
 .masthead-demo span { color: var(--signal); }
 .masthead-annotate span { color: var(--signal-soft); }
 
 .masthead-demo:hover {
-  border-color: var(--signal);
   color: var(--signal-dark);
   transform: translateY(-1px);
 }
 
 .masthead-annotate:hover {
-  border-color: var(--signal-dark);
-  background: var(--signal-dark);
-  box-shadow: 0 4px 0 var(--signal);
-  color: var(--paper);
+  background: transparent;
+  box-shadow: none;
+  color: var(--signal);
   transform: translateY(-1px);
 }
 
@@ -190,7 +188,7 @@
   .masthead-nav a::after { left: 0.9rem; bottom: -0.45rem; }
   .masthead-actions { gap: 0.3rem; }
   .masthead-demo,
-  .masthead-annotate { padding: 0.55rem 0.62rem; font-size: 0.78rem; }
+  .masthead-annotate { padding: 0.4rem 0.1rem; font-size: 1rem; }
   .research-chapter { scroll-margin-top: 6.6rem; }
 }
 
