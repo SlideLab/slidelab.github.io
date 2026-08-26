@@ -314,7 +314,6 @@ export default function DeckForge() {
             My decks
           </button>
         </div>
-        <span className="df-runtime">~10 min</span>
       </div>
 
       {mode === "gen" ? (
@@ -412,7 +411,7 @@ export default function DeckForge() {
                 <>
                   <span className="df-choice-word">or</span>
                   <button className="df-pdfbtn" type="button" onClick={() => fileRef.current?.click()}>
-                    Upload a PDF <span aria-hidden="true">↥</span>
+                    Upload PDF <span aria-hidden="true">↥</span>
                   </button>
                 </>
               )}
@@ -449,39 +448,39 @@ export default function DeckForge() {
       ) : (
         <>
           <h2 className="df-q">Your decks.</h2>
-          <p className="df-sub">Use the email and PIN from your start email.</p>
-
-          <div className="df-field">
-            <label className="df-label" htmlFor="df-account-email">Email</label>
-            <input
-              id="df-account-email"
-              className="df-email"
-              type="email"
-              value={mEmail}
-              onChange={(e) => setMEmail(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") loadMine(); }}
-              placeholder="email"
-              spellCheck={false}
-              autoComplete="email"
-            />
-          </div>
-          <div className="df-field">
-            <label className="df-label" htmlFor="df-account-pin">Recovery PIN</label>
-            <input
-              id="df-account-pin"
-              className="df-pin-input"
-              value={mPin}
-              onChange={(e) => setMPin(e.target.value)}
-              onKeyDown={(e) => { if (e.key === "Enter") loadMine(); }}
-              placeholder="PIN"
-              spellCheck={false}
-              autoComplete="off"
-            />
+          <div className="df-account-fields">
+            <div className="df-field">
+              <label className="df-label" htmlFor="df-account-email">Email</label>
+              <input
+                id="df-account-email"
+                className="df-email"
+                type="email"
+                value={mEmail}
+                onChange={(e) => setMEmail(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") loadMine(); }}
+                placeholder="name@institution.edu"
+                spellCheck={false}
+                autoComplete="email"
+              />
+            </div>
+            <div className="df-field">
+              <label className="df-label" htmlFor="df-account-pin">Recovery PIN</label>
+              <input
+                id="df-account-pin"
+                className="df-pin-input"
+                value={mPin}
+                onChange={(e) => setMPin(e.target.value)}
+                onKeyDown={(e) => { if (e.key === "Enter") loadMine(); }}
+                placeholder="PIN"
+                spellCheck={false}
+                autoComplete="off"
+              />
+            </div>
           </div>
 
           <div className="df-actions">
             <button className="df-go" type="button" onClick={loadMine} disabled={!mEmail.trim() || !mPin.trim() || mineLoading}>
-              {mineLoading ? "Checking…" : "Show my decks"}
+              {mineLoading ? "Checking…" : "Show Decks"}
             </button>
           </div>
 

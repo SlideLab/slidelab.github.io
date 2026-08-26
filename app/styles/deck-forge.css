@@ -47,36 +47,39 @@
 .df-topline {
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: flex-start;
 }
 .df-tabs {
   display: flex;
-  align-items: flex-start;
-  gap: 1.65rem;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  background: rgba(251, 250, 248, 0.62);
+  box-shadow: 0 8px 24px rgba(23, 24, 27, 0.08);
+  backdrop-filter: blur(12px);
 }
 .df-tab {
   font-family: var(--sans);
   font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: 0;
-  color: var(--ink-faint);
-  background: none;
+  color: var(--ink-soft);
+  background: transparent;
   border: 0;
-  padding: 0;
+  border-radius: 999px;
+  padding: 0.58rem 1.05rem;
   cursor: pointer;
   transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-.df-tab:hover { color: var(--ink-soft); }
-.df-tab.is-active { color: var(--signal); font-weight: 650; }
-.df-tab:hover { transform: translateY(-1px); }
-.df-runtime {
-  flex: 0 0 auto;
-  padding-top: 0.05rem;
-  font-family: var(--sans);
-  font-size: 1rem;
-  color: var(--ink-soft);
+.df-tab:hover { color: var(--ink); }
+.df-tab.is-active {
+  color: white;
+  background: var(--signal);
+  box-shadow: 0 5px 14px rgba(68, 54, 200, 0.2);
+  font-weight: 650;
 }
+.df-tab:hover { transform: translateY(-1px); }
 
 /* headline ------------------------------------------------- */
 .df-q {
@@ -138,8 +141,9 @@
   color: var(--ink);
   background: transparent;
   border: 0;
+  border-bottom: 2px solid color-mix(in srgb, var(--signal) 32%, var(--ink-ghost));
   outline: 0;
-  padding: 0.28em 0;
+  padding: 0.28em 0 0.48em;
   width: 100%;
   caret-color: var(--signal);
   transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
@@ -149,7 +153,10 @@
 .df-pin-input::placeholder { color: var(--ink-ghost); }
 .df-input:focus,
 .df-email:focus,
-.df-pin-input:focus { color: var(--signal-dark); transform: translateX(0.18rem); }
+.df-pin-input:focus {
+  color: var(--signal-dark);
+  border-bottom-color: var(--signal);
+}
 .df-field:focus-within .df-label,
 .df-reveal:focus-within .df-label { color: var(--signal-dark); }
 .df-field.is-error .df-input { color: var(--warn); }
@@ -161,6 +168,7 @@
   justify-content: space-between;
   gap: 0.8rem;
   padding: 0.35em 0;
+  border-bottom: 2px solid var(--signal);
 }
 .df-pdfname {
   font-size: 1.25rem;
@@ -219,34 +227,37 @@
   font-family: var(--sans);
   font-size: 1.15rem;
   font-weight: 600;
-  color: var(--ink);
-  background: transparent;
+  color: white;
+  background: var(--signal);
   border: 0;
-  padding: 0.3em 0;
+  border-radius: 999px;
+  padding: 0.7em 1.05em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.45ch;
-  transition: color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  box-shadow: 0 8px 20px rgba(68, 54, 200, 0.18);
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-.df-pdfbtn { color: var(--signal-dark); }
-.df-pdfbtn:hover { color: var(--signal); transform: translateY(-1px); }
+.df-pdfbtn:hover { background: var(--signal-dark); transform: translateY(-1px); }
 /* Generate — the primary CTA (solid signal) */
 .df-go {
   font-family: var(--sans);
   font-size: 1.25rem;
   font-weight: 600;
-  color: var(--signal);
-  background: transparent;
+  color: white;
+  background: var(--signal);
   border: 0;
-  padding: 0.35em 0;
+  border-radius: 999px;
+  padding: 0.72em 1.15em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.45ch;
-  transition: color var(--dur) var(--ease);
+  box-shadow: 0 8px 20px rgba(68, 54, 200, 0.18);
+  transition: background var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-.df-go:hover:not(:disabled) { color: var(--signal-dark); }
+.df-go:hover:not(:disabled) { background: var(--signal-dark); transform: translateY(-1px); }
 .df-go:disabled { opacity: 0.45; cursor: not-allowed; }
 .df-go .df-go-arrow { transition: transform var(--dur) var(--ease); }
 .df-go:hover:not(:disabled) .df-go-arrow { transform: translateX(3px); }
@@ -364,6 +375,11 @@
 .df-badge--extracting,
 .df-badge--generating { background: transparent; color: var(--signal-dark); }
 .df-badge--error { background: transparent; color: var(--warn); }
+.df-account-fields {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(8rem, 0.7fr);
+  gap: 1.4rem;
+}
 
 /* drag + shake affordances --------------------------------- */
 .deck-forge.is-drag::before { filter: blur(22px) saturate(1.4); }
@@ -387,4 +403,5 @@
   .deck-forge { padding: 2rem 1.4rem 2.2rem; }
   .df-source-picker { grid-template-columns: 1fr auto auto; align-items: baseline; }
   .df-pdfbtn { justify-self: start; }
+  .df-account-fields { grid-template-columns: 1fr; gap: 1rem; }
 }
