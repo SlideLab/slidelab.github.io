@@ -12,15 +12,41 @@
   gap: 1.05rem;
   min-width: 0;
   max-width: 100%;
+  padding: 1.35rem clamp(2rem, 4vw, 3.25rem) 1.55rem;
   font-family: var(--sans);
 }
-/* short signal bar — a craft mark */
+/* Typographic enclosure: containment without a rectangular card. */
 .deck-forge::before {
-  content: "";
-  width: 2.7rem;
-  height: 3px;
-  background: var(--signal);
+  content: "(";
+  position: absolute;
+  left: -0.06em;
+  top: 50%;
+  z-index: 0;
+  color: color-mix(in srgb, var(--signal) 34%, var(--rule));
+  font-family: var(--serif);
+  font-size: clamp(13rem, 24vw, 20rem);
+  font-weight: 400;
+  line-height: 0.5;
+  transform: translate(-38%, -50%) scaleX(0.42) scaleY(1.18);
+  transform-origin: center;
+  pointer-events: none;
 }
+.deck-forge::after {
+  content: ")";
+  position: absolute;
+  right: -0.06em;
+  top: 50%;
+  z-index: 0;
+  color: color-mix(in srgb, var(--signal) 34%, var(--rule));
+  font-family: var(--serif);
+  font-size: clamp(13rem, 24vw, 20rem);
+  font-weight: 400;
+  line-height: 0.5;
+  transform: translate(38%, -50%) scaleX(0.42) scaleY(1.18);
+  transform-origin: center;
+  pointer-events: none;
+}
+.deck-forge > * { position: relative; z-index: 1; }
 
 /* mode toggle ----------------------------------------------- */
 .df-tabs {
@@ -30,7 +56,7 @@
 }
 .df-tab {
   font-family: var(--mono);
-  font-size: var(--t-micro);
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--ink-faint);
@@ -63,7 +89,14 @@
 }
 
 /* fields ---------------------------------------------------- */
-.df-field { display: flex; flex-direction: column; gap: 0.3rem; }
+.df-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.df-label {
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--ink-soft);
+}
 .df-input,
 .df-email,
 .df-pin-input {
@@ -85,6 +118,8 @@
 .df-input:focus,
 .df-email:focus,
 .df-pin-input:focus { border-bottom-color: var(--signal); }
+.df-field:focus-within .df-label,
+.df-reveal:focus-within .df-label { color: var(--signal-dark); }
 .df-field.is-error .df-input { border-bottom-color: var(--warn); }
 
 /* selected-PDF chip ----------------------------------------- */
@@ -127,9 +162,10 @@
 }
 .df-payoff {
   margin: 0;
-  font-size: var(--t-small);
+  font-family: var(--mono);
+  font-size: 0.8rem;
   color: var(--ink-soft);
-  line-height: 1.5;
+  line-height: 1.4;
 }
 
 /* action row ----------------------------------------------- */
@@ -141,19 +177,21 @@
 }
 /* Upload PDF — clear secondary chip */
 .df-pdfbtn {
-  font-family: var(--mono);
-  font-size: var(--t-small);
+  font-family: var(--sans);
+  font-size: var(--t-body);
+  font-weight: 600;
   color: var(--signal-dark);
-  background: var(--signal-wash);
-  border: 0;
-  padding: 0.6em 1em;
+  background: transparent;
+  border: 1px solid var(--signal);
+  border-bottom-width: 3px;
+  padding: 0.64em 1.05em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.45ch;
   transition: background var(--dur) var(--ease);
 }
-.df-pdfbtn:hover { background: #d6d1f0; }
+.df-pdfbtn:hover { background: var(--signal-wash); }
 /* Generate — the primary CTA (solid signal) */
 .df-go {
   font-family: var(--sans);
@@ -177,7 +215,7 @@
 /* inline text link button ---------------------------------- */
 .df-link {
   font-family: var(--mono);
-  font-size: var(--t-micro);
+  font-size: 0.82rem;
   color: var(--link);
   background: none;
   border: 0;
@@ -216,7 +254,7 @@
 .df-open:hover { color: var(--link-hover); }
 .df-pin {
   font-family: var(--mono);
-  font-size: var(--t-micro);
+  font-size: 0.82rem;
   color: var(--ink-soft);
   margin: 0;
   line-height: 1.5;
@@ -226,30 +264,29 @@
 /* Recovery credential: always visible as soon as a job is accepted. */
 .df-recovery {
   display: grid;
-  grid-template-columns: auto 1fr;
-  align-items: baseline;
-  column-gap: 0.8rem;
-  row-gap: 0.2rem;
-  padding: 0.55rem 0;
-  border-top: 1px solid var(--rule);
-  border-bottom: 1px solid var(--rule);
+  grid-template-columns: 1fr;
+  row-gap: 0.35rem;
+  padding: 0.8rem 0 0.7rem 1rem;
+  border-left: 3px solid var(--signal);
 }
 .df-recovery-label {
-  font-family: var(--mono);
-  font-size: var(--t-micro);
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
 }
 .df-recovery-code {
   font-family: var(--mono);
-  font-size: clamp(1.25rem, 3vw, 1.65rem);
-  letter-spacing: 0.14em;
+  font-size: clamp(1.7rem, 3.2vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: 0.11em;
   color: var(--signal);
+  user-select: all;
 }
 .df-recovery-note {
-  grid-column: 1 / -1;
-  font-size: var(--t-micro);
+  font-size: 0.9rem;
+  line-height: 1.4;
   color: var(--ink-soft);
 }
 
@@ -277,10 +314,10 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.df-job-meta { font-family: var(--mono); font-size: var(--t-micro); color: var(--ink-faint); }
+.df-job-meta { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-faint); }
 .df-badge {
   font-family: var(--mono);
-  font-size: var(--t-micro);
+  font-size: 0.78rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 0.2em 0.5em;
@@ -309,4 +346,10 @@
 @media (prefers-reduced-motion: reduce) {
   .df-reveal { animation: none; }
   .deck-forge.is-shake { animation: none; }
+}
+
+@media (max-width: 600px) {
+  .deck-forge { padding-inline: 1.35rem; }
+  .deck-forge::before,
+  .deck-forge::after { opacity: 0.72; }
 }

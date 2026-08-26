@@ -371,6 +371,7 @@ export default function DeckForge() {
             <p className="df-q">Turn a paper into a deck.</p>
 
             <div className={`df-field${shake ? " is-error" : ""}`}>
+              <label className="df-label" htmlFor="df-paper">Paper</label>
               {pdf ? (
                 <div className="df-pdfchoice">
                   <span className="df-pdfname">{pdfTitle || pdf.name}</span>
@@ -380,6 +381,7 @@ export default function DeckForge() {
                 </div>
               ) : (
                 <input
+                  id="df-paper"
                   className="df-input"
                   value={val}
                   onChange={(e) => setVal(e.target.value)}
@@ -388,7 +390,7 @@ export default function DeckForge() {
                       (document.getElementById("df-email") as HTMLInputElement)?.focus();
                     }
                   }}
-                  placeholder="paste an arXiv link — or drop a PDF"
+                  placeholder="arXiv URL or ID"
                   spellCheck={false}
                   autoComplete="off"
                 />
@@ -403,7 +405,8 @@ export default function DeckForge() {
 
             {hasPaper && (
               <div className="df-reveal">
-                <p className="df-payoff">We&rsquo;ll forge ~14 slides and email them to you in ~10 minutes.</p>
+                <p className="df-payoff">~14 slides · ~10 min · delivered by email</p>
+                <label className="df-label" htmlFor="df-email">Delivery email</label>
                 <input
                   id="df-email"
                   className="df-email"
@@ -425,7 +428,7 @@ export default function DeckForge() {
                 </button>
               ) : (
                 <button className="df-pdfbtn" type="button" onClick={() => fileRef.current?.click()}>
-                  <span aria-hidden="true">↥</span> or upload a PDF
+                  <span aria-hidden="true">↥</span> Upload PDF
                 </button>
               )}
             </div>
@@ -437,7 +440,9 @@ export default function DeckForge() {
           <p className="df-sub">Use the email and PIN from your start email.</p>
 
           <div className="df-field">
+            <label className="df-label" htmlFor="df-account-email">Email</label>
             <input
+              id="df-account-email"
               className="df-email"
               type="email"
               value={mEmail}
@@ -449,7 +454,9 @@ export default function DeckForge() {
             />
           </div>
           <div className="df-field">
+            <label className="df-label" htmlFor="df-account-pin">Recovery PIN</label>
             <input
+              id="df-account-pin"
               className="df-pin-input"
               value={mPin}
               onChange={(e) => setMPin(e.target.value)}
