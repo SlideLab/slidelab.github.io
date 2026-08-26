@@ -24,6 +24,9 @@ export default function Hero() {
           ) : (
             <span>Code &middot; {site.release.code}</span>
           )}
+          <a href={site.links.annotation} target="_blank" rel="noreferrer">
+            Blind annotation <span aria-hidden="true">&#8599;</span>
+          </a>
         </div>
       </div>
 

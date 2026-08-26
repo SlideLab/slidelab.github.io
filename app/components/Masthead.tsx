@@ -77,8 +77,8 @@ export default function Masthead() {
           })}
         </nav>
 
-        <a className="masthead-paper" href={site.links.paper}>
-          Read paper <span aria-hidden="true">&#8599;</span>
+        <a className="masthead-paper" href={site.links.annotation} target="_blank" rel="noreferrer">
+          Annotate decks <span aria-hidden="true">&#8599;</span>
         </a>
       </div>
     </header>

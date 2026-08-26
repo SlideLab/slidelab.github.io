@@ -585,149 +585,188 @@
   color: #17181b;
 }
 
-/* Each part of the section is a block. Separation comes from the mark,
-   the heading, and the gap between blocks — never from rules or boxes. */
-.block { margin-top: clamp(3rem, 6vh, 4.5rem); }
-.block:first-of-type { margin-top: clamp(1.75rem, 3vh, 2.5rem); }
+/* Three blocks, each a different shape so each part reads as distinct:
+   the room is a two-part split, the talk is a numbered flow, the measures
+   are a grid. Each block is a full-bleed band — a flat colour stripe edge
+   to edge, sharp corners, no border, no radius. That is the box-free way
+   to make each part a self-contained, noticeable region. */
+.band {
+  margin-inline: calc(-1 * var(--gutter));
+  padding: clamp(1.75rem, 3.5vh, 2.5rem) var(--gutter);
+}
+.band-lift { background: #22242e; }
+.band .block { margin-top: 0; }
 
 .block-head {
   display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  margin: 0 0 1.5rem;
+  align-items: baseline;
+  gap: 0.65rem;
+  margin: 0 0 1.1rem;
   color: #f6f5f1;
   font-family: var(--display);
-  font-size: 1.38rem;
+  font-size: 1.2rem;
   font-weight: 600;
   letter-spacing: -0.02em;
 }
 
-.block-mark {
-  display: inline-block;
-  width: 0.7rem;
-  height: 0.7rem;
-  background: var(--signal);
-  flex: none;
+.block-num {
+  color: var(--signal);
+  font-family: var(--numerals);
+  font-size: 1.1rem;
+  font-weight: 540;
+  font-variation-settings: "SOFT" 75, "WONK" 1, "opsz" 40;
 }
 
-/* who is in the room, split by what they are allowed to see */
-.room {
+.block-lead {
+  margin: 0 0 1.3rem;
+  max-width: 70ch;
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+
+/* room: two-part split */
+.room-split {
   display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
-  gap: clamp(1.75rem, 4vw, 3.5rem);
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* each group is a contained panel — a flat, sharp-cornered, borderless
+   fill so the roles read as one part. No radius, no border: not a card. */
+.room-side {
+  background: #1b1c22;
+  padding: clamp(1.1rem, 1.6vw, 1.4rem);
 }
 
 .room-label {
-  margin: 0 0 1.1rem;
+  margin: 0 0 1rem;
   color: var(--signal);
   font-family: var(--display);
-  font-size: 1.12rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
 .room-roles { margin: 0; padding: 0; list-style: none; }
-.room-roles li { margin-bottom: 1rem; }
+.room-roles li { margin-bottom: 1.15rem; }
 .room-roles li:last-child { margin-bottom: 0; }
 
 .room-roles strong {
   display: block;
   color: #f6f5f1;
   font-family: var(--display);
-  font-size: 1rem;
+  font-size: 1.06rem;
   font-weight: 600;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .room-roles span {
   display: block;
-  margin-top: 0.2rem;
+  margin-top: 0.3rem;
   color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.5;
-}
-
-.room-audience .room-roles {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.5rem;
-}
-.room-audience .room-roles li { margin-bottom: 0; }
-
-/* the three stages, each anchored by a large numeral */
-.arena-stages {
-  margin: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1.5rem, 3vw, 2.75rem);
-  list-style: none;
-}
-
-.stage-num {
-  display: block;
-  color: var(--signal);
-  font-family: var(--numerals);
-  font-size: 2.3rem;
-  font-weight: 540;
-  line-height: 1;
-  font-variation-settings: "SOFT" 75, "WONK" 1, "opsz" 40;
-  margin-bottom: 0.55rem;
-}
-
-.arena-step {
-  margin: 0 0 0.55rem;
-  color: #f6f5f1;
-  font-family: var(--display);
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-}
-
-.arena-body {
-  margin: 0;
-  color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.58;
-}
-
-/* the six measures as a booktabs table — a reference list, not
-   floating prose. The table's own rules are the only lines here. */
-.metric-table-scroll table.tbl { min-width: 0; }
-.metric-table thead th { text-align: left; }
-.metric-table tbody td { text-align: left; vertical-align: top; }
-.metric-table .metric-name {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
-  color: #f6f5f1;
-  font-family: var(--display);
-  font-weight: 600;
-  white-space: nowrap;
-}
-.metric-dir { font-size: 0.85rem; font-weight: 400; }
-.metric-dir-lower { color: #6fc79a; }
-.metric-dir-higher { color: var(--signal); }
-.metric-table .metric-scope {
-  color: var(--ink-soft);
-  font-family: var(--mono);
-  font-size: 0.74rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  white-space: nowrap;
-}
-.metric-table .metric-def {
-  color: var(--ink-soft);
-  font-size: 0.86rem;
+  font-size: 0.92rem;
   line-height: 1.55;
 }
 
-@media (max-width: 980px) {
-  .room { grid-template-columns: 1fr; gap: 1.75rem; }
-  .arena-stages { grid-template-columns: 1fr; gap: 1.75rem; }
+/* stages: numbered flow — scoped to the ConfArena chapter so the
+   bare class names do not collide with the system chapter's own
+   .stage-name / .stage-body (which would otherwise be overridden by
+   these later rules and render white-on-paper). */
+.confarena-chapter .stage-flow {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.25rem, 2.5vw, 2rem);
 }
 
-@media (max-width: 620px) {
-  .room-audience .room-roles { grid-template-columns: 1fr; gap: 1rem; }
+/* each stage is a contained panel — same flat, sharp-cornered
+   treatment as the room groups and the measure cells. */
+.confarena-chapter .stage-flow li {
+  background: #1b1c22;
+  padding: clamp(1rem, 1.4vw, 1.2rem);
+}
+
+.confarena-chapter .stage-num {
+  display: block;
+  color: var(--signal);
+  font-family: var(--numerals);
+  font-size: 1.3rem;
+  font-weight: 540;
+  line-height: 1;
+  font-variation-settings: "SOFT" 75, "WONK" 1, "opsz" 40;
+  margin-bottom: 0.4rem;
+}
+
+.confarena-chapter .stage-name {
+  display: block;
+  color: #f6f5f1;
+  font-family: var(--display);
+  font-size: 1.04rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.35rem;
+}
+
+.confarena-chapter .stage-body {
+  display: block;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+
+/* measures: 3×2 grid */
+.metric-grid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.9rem, 1.5vw, 1.15rem);
+}
+
+/* each measure is a contained panel — same flat, sharp-cornered
+   treatment as the room groups, so the grid reads as six held parts. */
+.metric-cell {
+  background: #1b1c22;
+  padding: clamp(1rem, 1.4vw, 1.2rem);
+}
+
+.metric-cell .metric-name {
+  margin: 0;
+  color: #f6f5f1;
+  font-family: var(--display);
+  font-size: 0.98rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+.metric-dir { font-size: 0.82rem; font-weight: 400; margin-left: 0.3rem; }
+.metric-dir-lower { color: #6fc79a; }
+.metric-dir-higher { color: var(--signal); }
+
+.metric-cell .metric-scope {
+  margin-left: 0.4rem;
+  color: var(--ink-soft);
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.metric-cell .metric-def {
+  display: block;
+  margin: 0.5rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 980px) {
+  .room-split { grid-template-columns: 1fr; gap: 1.5rem; }
+  .confarena-chapter .stage-flow { grid-template-columns: 1fr; gap: 1.25rem; }
+  .metric-grid { grid-template-columns: 1fr; }
 }
 
 /* ---------- 03 results ---------- */
@@ -741,7 +780,7 @@
 /* the three readings the table supports */
 .reading-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(1.5rem, 3vw, 2.75rem);
   padding-top: 1.6rem;
   border-top: 1px solid var(--rule-mid);
@@ -751,19 +790,20 @@
 .reading-ours { border-left-color: var(--signal); }
 
 .reading-label {
-  margin: 0 0 0.5rem;
-  color: var(--ink-faint);
+  margin: 0 0 0.6rem;
+  color: var(--ink);
   font-family: var(--display);
-  font-size: 0.84rem;
+  font-size: 1.05rem;
   font-weight: 600;
+  letter-spacing: -0.01em;
 }
 .reading-ours .reading-label { color: var(--signal-dark); }
 
 .reading-body {
-  margin: 0 0 0.9rem;
+  margin: 0 0 1rem;
   color: var(--ink-soft);
-  font-size: 0.85rem;
-  line-height: 1.55;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .reading-figure { margin: 0; }
@@ -772,20 +812,20 @@
   display: block;
   color: var(--ink);
   font-family: var(--numerals);
-  font-size: 1.7rem;
+  font-size: 1.25rem;
   font-weight: 540;
   font-variation-settings: "SOFT" 70, "WONK" 1, "opsz" 40;
   letter-spacing: -0.035em;
-  line-height: 1;
+  line-height: 1.1;
 }
 .reading-ours .reading-figure strong { color: var(--signal); }
 
 .reading-figure span {
   display: block;
-  margin-top: 0.3rem;
-  color: var(--ink-faint);
-  font-size: 0.76rem;
-  line-height: 1.4;
+  margin-top: 0.35rem;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.45;
 }
 
 @media (max-width: 900px) {
@@ -821,8 +861,8 @@
   max-width: 46ch;
   margin: 0 0 1.4rem;
   color: var(--ink-soft);
-  font-size: 0.86rem;
-  line-height: 1.55;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .validation-split .tbl-scroll table.tbl { min-width: 26rem; }

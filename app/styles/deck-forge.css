@@ -223,6 +223,36 @@
 }
 .df-pin b { color: var(--ink); letter-spacing: 0.05em; }
 
+/* Recovery credential: always visible as soon as a job is accepted. */
+.df-recovery {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  column-gap: 0.8rem;
+  row-gap: 0.2rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.df-recovery-label {
+  font-family: var(--mono);
+  font-size: var(--t-micro);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.df-recovery-code {
+  font-family: var(--mono);
+  font-size: clamp(1.25rem, 3vw, 1.65rem);
+  letter-spacing: 0.14em;
+  color: var(--signal);
+}
+.df-recovery-note {
+  grid-column: 1 / -1;
+  font-size: var(--t-micro);
+  color: var(--ink-soft);
+}
+
 /* my decks list -------------------------------------------- */
 .df-jobs {
   list-style: none;

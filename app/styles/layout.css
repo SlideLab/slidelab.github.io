@@ -280,6 +280,24 @@
   border: 0;
   background: transparent;
   color: var(--ink);
+  /* The drawer is a <dialog> that lives in the DOM under whichever
+     chapter opens it. Dark chapters redefine --ink/--paper to light
+     values, which would cascade in and wash the sheet's text out
+     against its light background. Pin the light token set here so the
+     sheet always renders dark-ink-on-paper regardless of its parent. */
+  --paper: #fbfaf8;
+  --paper-deep: #e6e4de;
+  --surface-1: #ecebe6;
+  --ink: #17181b;
+  --ink-soft: #4e5057;
+  --ink-faint: #74767d;
+  --ink-ghost: #a2a4aa;
+  --rule: #d6d4cd;
+  --rule-mid: #b5b3ab;
+  --rule-strong: #34363a;
+  --signal: #4436c8;
+  --signal-dark: #2f238f;
+  --signal-soft: #7a6ee4;
 }
 
 .evidence-dialog::backdrop { background: rgba(16, 17, 15, 0.58); }

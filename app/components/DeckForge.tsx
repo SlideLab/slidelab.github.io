@@ -9,7 +9,9 @@ import {
   type DragEvent,
 } from "react";
 
-const WEBAPP = process.env.NEXT_PUBLIC_SLIDEGEN_API || "http://127.0.0.1:8861";
+const WEBAPP =
+  process.env.NEXT_PUBLIC_SLIDEGEN_API ||
+  (process.env.NODE_ENV === "development" ? "http://127.0.0.1:8861" : "");
 const API = WEBAPP;
 
 const ARXIV_ID = /\d{4}\.\d{4,5}(?:v\d+)?/;
@@ -158,6 +160,11 @@ export default function DeckForge() {
 
   const submit = useCallback(
     async (body: BodyInit) => {
+      if (!API) {
+        setPhase("error");
+        setShake(true);
+        return;
+      }
       setPhase("working");
       setStage("queued");
       setPin(null);
@@ -314,8 +321,19 @@ export default function DeckForge() {
               <div className="df-result">
                 <span className="df-status">{STAGE[stage] ?? "working"}</span>
                 <p className="df-aside">
-                  We&rsquo;ll email <b>{email}</b> when it&rsquo;s ready — close the tab and come back later. Your PIN is in that email.
+                  We&rsquo;ll email <b>{email}</b> when it&rsquo;s ready. You can close this tab and return through &ldquo;My decks&rdquo;.
                 </p>
+                {pin && (
+                  <div className="df-recovery" aria-live="polite">
+                    <span className="df-recovery-label">Your recovery PIN</span>
+                    <strong className="df-recovery-code">{pin}</strong>
+                    <span className="df-recovery-note">
+                      {emailSent
+                        ? "We also sent this PIN to your email."
+                        : "Email delivery is unavailable, so save this PIN now."}
+                    </span>
+                  </div>
+                )}
               </div>
             )}
             {phase === "done" && jobId && (
@@ -324,10 +342,12 @@ export default function DeckForge() {
                 <a className="df-open" href={`${WEBAPP}/view/${jobId}/`} target="_blank" rel="noreferrer">
                   Open the deck <span aria-hidden="true">↗</span>
                 </a>
-                {pin && !emailSent && (
-                  <p className="df-pin">
-                    PIN <b>{pin}</b> — email isn&rsquo;t set up here, so keep this to retrieve the deck under &ldquo;My decks&rdquo;.
-                  </p>
+                {pin && (
+                  <div className="df-recovery" aria-live="polite">
+                    <span className="df-recovery-label">Recovery PIN</span>
+                    <strong className="df-recovery-code">{pin}</strong>
+                    <span className="df-recovery-note">Use it with {email} under &ldquo;My decks&rdquo;.</span>
+                  </div>
                 )}
                 <button className="df-link" type="button" onClick={resetGen}>
                   forge another
@@ -336,7 +356,9 @@ export default function DeckForge() {
             )}
             {phase === "error" && (
               <div className="df-result">
-                <p className="df-err">That didn&rsquo;t generate. Try again.</p>
+                <p className="df-err">
+                  {API ? "That didn’t generate. Try again." : "The public demo API has not been configured."}
+                </p>
                 <button className="df-link" type="button" onClick={resetGen}>
                   retry
                 </button>

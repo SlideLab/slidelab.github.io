@@ -5,26 +5,32 @@ import { attendees } from "../site.config";
 const STAGES = [
   {
     step: "Presentation",
-    body: "The talk runs slide by slide — the examiner checks each slide against the paper while attendees note what they cannot follow.",
+    body: "The examiner reads the paper, then the talk runs slide by slide: each slide is checked against the paper for unsupported claims, while attendees note what they cannot follow.",
   },
   {
     step: "Q&A",
-    body: "Questions go to the presenter by priority; the examiner labels why each arose — missing, unclear, buried, or beyond scope.",
+    body: "Collected questions go to the presenter, prioritised by how many attendees raised them; the examiner then labels why each arose — missing, unclear, buried, or beyond scope.",
   },
   {
     step: "Assessment",
-    body: "Observation becomes six measures, not one score — each rank-normalised within a paper, averaged with equal weight.",
+    body: "Everything observed is aggregated into six measures rather than one score, each rank-normalised within a paper and averaged with equal weight.",
   },
 ];
 
 /* The six measures, defined as Section 4.5 defines them. */
 const METRICS = [
-  { name: "Grounding errors", scope: "per slide", dir: "lower", definition: "Claims the paper does not support, including wrong numbers." },
-  { name: "Figure errors", scope: "per slide", dir: "lower", definition: "Figures the paper does not support, or that are illegible." },
-  { name: "Design", scope: "per slide", dir: "higher", definition: "How clean and readable the slide looks, scored 1 to 5." },
-  { name: "Figure use", scope: "per slide", dir: "higher", definition: "How well the figures support the slide's content, 1 to 5." },
-  { name: "Narrative errors", scope: "whole talk", dir: "lower", definition: "Breaks in flow — results before method, or a missing conclusion." },
-  { name: "Coverage", scope: "whole talk", dir: "higher", definition: "The fraction of the paper's key points that reach the deck." },
+  { name: "Grounding errors", scope: "per slide", dir: "lower", def: "Claims on a slide that the paper does not support, including wrong numbers." },
+  { name: "Figure errors", scope: "per slide", dir: "lower", def: "Figures that depict content the paper does not support, or that are illegible." },
+  { name: "Design", scope: "per slide", dir: "higher", def: "How clean and readable the slide looks, scored 1 to 5." },
+  { name: "Figure use", scope: "per slide", dir: "higher", def: "How well the slide's figures support its content, scored 1 to 5." },
+  { name: "Narrative errors", scope: "whole talk", dir: "lower", def: "Breaks in the flow — results before the method, or a missing conclusion." },
+  { name: "Coverage", scope: "whole talk", dir: "higher", def: "The fraction of the paper's key points that actually reach the deck." },
+];
+
+const BLOCKS = [
+  { num: "01", label: "The room" },
+  { num: "02", label: "How the talk runs" },
+  { num: "03", label: "What it measures" },
 ];
 
 export default function ConfArenaChapter() {
@@ -37,97 +43,98 @@ export default function ConfArenaChapter() {
         </p>
 
         <header className="chapter-head">
-          <h2>Evaluate the talk, not the artifact</h2>
+          <h2>A simulated conference room</h2>
           <p>
-            A finished deck is not the talk — understanding builds slide by slide,
-            and the failures surface as questions.
+            A finished deck is not the talk — understanding builds slide by
+            slide, and the failures surface as questions.
           </p>
         </header>
+      </div>
 
-        <div className="block">
+      {/* room: a two-part split — paper readers vs deck-only */}
+      <div className="band band-lift">
+        <div className="chapter-inner block">
           <h3 className="block-head">
-            <i className="block-mark" aria-hidden="true" />
-            The room
+            <span className="block-num">{BLOCKS[0].num}</span>
+            {BLOCKS[0].label}
           </h3>
-          <div className="room">
+          <p className="block-lead">
+            Two agents read the full paper; three see only the deck. The gap
+            between what each side knows is what the evaluation exploits.
+          </p>
+          <div className="room-split">
             <div className="room-side">
               <p className="room-label">Reads the full paper</p>
               <ul className="room-roles">
                 <li>
                   <strong>Presenter</strong>
-                  <span>Answers questions as the author.</span>
+                  <span>Answers the audience's questions as the paper's author.</span>
                 </li>
                 <li>
                   <strong>Examiner</strong>
-                  <span>The reference for every evaluation.</span>
+                  <span>Holds the paper and checks every slide claim against it.</span>
                 </li>
               </ul>
             </div>
-
-            <div className="room-side room-audience">
+            <div className="room-side">
               <p className="room-label">Sees only the slide deck</p>
               <ul className="room-roles">
-                {attendees.map((attendee) => (
-                  <li key={attendee.name}>
-                    <strong>{attendee.name}</strong>
-                    <span>{attendee.focus}</span>
+                {attendees.map((a) => (
+                  <li key={a.name}>
+                    <strong>{a.name}</strong>
+                    <span>{a.focus}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="block">
+      {/* stages: a numbered flow */}
+      <div className="band">
+        <div className="chapter-inner block">
           <h3 className="block-head">
-            <i className="block-mark" aria-hidden="true" />
-            How the talk runs
+            <span className="block-num">{BLOCKS[1].num}</span>
+            {BLOCKS[1].label}
           </h3>
-          <ol className="arena-stages">
+          <ol className="stage-flow">
             {STAGES.map((stage, index) => (
               <li key={stage.step}>
                 <span className="stage-num" aria-hidden="true">{index + 1}</span>
-                <p className="arena-step">{stage.step}</p>
-                <p className="arena-body">{stage.body}</p>
+                <span className="stage-name">{stage.step}</span>
+                <span className="stage-body">{stage.body}</span>
               </li>
             ))}
           </ol>
         </div>
+      </div>
 
-        <div className="block">
+      {/* measures: a 3×2 grid */}
+      <div className="band band-lift">
+        <div className="chapter-inner block">
           <h3 className="block-head">
-            <i className="block-mark" aria-hidden="true" />
-            What it measures
+            <span className="block-num">{BLOCKS[2].num}</span>
+            {BLOCKS[2].label}
           </h3>
-          <div className="tbl-scroll metric-table-scroll">
-            <table className="tbl metric-table">
-              <thead>
-                <tr>
-                  <th>Measure</th>
-                  <th>Scope</th>
-                  <th style={{ textAlign: "left" }}>What it counts</th>
-                </tr>
-              </thead>
-              <tbody>
-                {METRICS.map((metric) => (
-                  <tr key={metric.name}>
-                    <td>
-                      <span className="metric-name">
-                        {metric.name}
-                        <span className={`metric-dir metric-dir-${metric.dir}`} aria-label={`${metric.dir} is better`}>
-                          {metric.dir === "lower" ? "↓" : "↑"}
-                        </span>
-                      </span>
-                    </td>
-                    <td className="metric-scope">{metric.scope}</td>
-                    <td className="metric-def">{metric.definition}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <ul className="metric-grid">
+            {METRICS.map((metric) => (
+              <li key={metric.name} className="metric-cell">
+                <p className="metric-name">
+                  {metric.name}
+                  <span className={`metric-dir metric-dir-${metric.dir}`} aria-label={`${metric.dir} is better`}>
+                    {metric.dir === "lower" ? "↓" : "↑"}
+                  </span>
+                  <span className="metric-scope">{metric.scope}</span>
+                </p>
+                <p className="metric-def">{metric.def}</p>
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
 
+      <div className="chapter-inner">
         <div className="system-actions">
           <EvidenceDrawer
             title="The audience, and why it is described so briefly"

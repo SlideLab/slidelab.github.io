@@ -94,7 +94,7 @@ export default function ResultsChapter() {
           </figcaption>
         </figure>
 
-        {/* The three readings the table supports, stated once each. */}
+        {/* The two readings the table supports, stated once each. */}
         <div className="reading-grid">
           <section className="reading reading-ours">
             <p className="reading-label">SlideLab</p>
@@ -105,18 +105,6 @@ export default function ResultsChapter() {
             <p className="reading-figure">
               <strong>0.99</strong>
               <span>coverage, at 0.71 grounding errors per slide</span>
-            </p>
-          </section>
-
-          <section className="reading">
-            <p className="reading-label">Kimi Slides</p>
-            <p className="reading-body">
-              Fewest figure errors, because it draws figures programmatically rather than
-              with an image model. Its coverage of the source paper is lower.
-            </p>
-            <p className="reading-figure">
-              <strong>0.17</strong>
-              <span>figure errors per slide, at 0.91 coverage</span>
             </p>
           </section>
 

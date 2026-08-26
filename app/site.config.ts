@@ -19,7 +19,8 @@ export const site = {
   links: {
     paper: "/exhibits/SlideLab.pdf",
     code: "",
-    demo: "",
+    demo: "https://slidegen.103-127-146-98.nip.io",
+    annotation: "https://annotate.103-127-146-98.nip.io",
   },
   release: {
     code: "Released after the review period",

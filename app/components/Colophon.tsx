@@ -21,8 +21,8 @@ export default function Colophon() {
             </pre>
             <p className="colophon-note">
               Every figure, table, and number on this site is taken from the submitted
-              manuscript and its appendix. The paper is under review, so the code and
-              the annotation platform follow after the review period.
+              manuscript and its appendix. You can contribute to the ongoing blind
+              evaluation through the public annotation platform.
             </p>
           </div>
 
@@ -36,6 +36,14 @@ export default function Colophon() {
             <div className="colophon-fact">
               <span className="label">Code &amp; data</span>
               <p>{site.release.code}.</p>
+            </div>
+            <div className="colophon-fact">
+              <span className="label">Human evaluation</span>
+              <p>
+                <a href={site.links.annotation} target="_blank" rel="noreferrer">
+                  Blind-annotate presentation decks
+                </a>
+              </p>
             </div>
             <div className="colophon-fact">
               <span className="label">Authors</span>
