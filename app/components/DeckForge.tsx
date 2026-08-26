@@ -305,13 +305,16 @@ export default function DeckForge() {
       onDragLeave={() => setDrag(false)}
       onDrop={mode === "gen" ? onDrop : undefined}
     >
-      <div className="df-tabs" role="tablist">
-        <button className={`df-tab${mode === "gen" ? " is-active" : ""}`} role="tab" onClick={() => setMode("gen")}>
-          Forge
-        </button>
-        <button className={`df-tab${mode === "mine" ? " is-active" : ""}`} role="tab" onClick={() => setMode("mine")}>
-          My decks
-        </button>
+      <div className="df-topline">
+        <div className="df-tabs" role="tablist">
+          <button className={`df-tab${mode === "gen" ? " is-active" : ""}`} role="tab" onClick={() => setMode("gen")}>
+            Generate
+          </button>
+          <button className={`df-tab${mode === "mine" ? " is-active" : ""}`} role="tab" onClick={() => setMode("mine")}>
+            My decks
+          </button>
+        </div>
+        <span className="df-runtime">~10 min</span>
       </div>
 
       {mode === "gen" ? (
@@ -368,38 +371,48 @@ export default function DeckForge() {
           </>
         ) : (
           <>
-            <p className="df-q">Turn a paper into a deck.</p>
+            <div className="df-intro">
+              <p className="df-q">Turn a paper into a deck.</p>
+              <p className="df-sub">Add the paper. We&rsquo;ll handle the slides.</p>
+            </div>
 
-            <div className={`df-field${shake ? " is-error" : ""}`}>
-              <label className="df-label" htmlFor="df-paper">Paper</label>
-              {pdf ? (
-                <div className="df-pdfchoice">
-                  <span className="df-pdfname">{pdfTitle || pdf.name}</span>
-                  <button className="df-link" type="button" onClick={() => { setPdf(null); setPdfTitle(null); }}>
-                    remove
-                  </button>
-                </div>
-              ) : (
-                <input
-                  id="df-paper"
-                  className="df-input"
-                  value={val}
-                  onChange={(e) => setVal(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && hasPaper) {
-                      (document.getElementById("df-email") as HTMLInputElement)?.focus();
-                    }
-                  }}
-                  placeholder="arXiv URL or ID"
-                  spellCheck={false}
-                  autoComplete="off"
-                />
-              )}
-              {identity && !pdf && (
-                <p className="df-meta">
-                  <span className="df-arrow" aria-hidden="true">→</span>
-                  <b>{identState === "loading" ? "found it —" : identity}</b>
-                </p>
+            <div className={`df-source-picker${hasPaper ? " has-paper" : ""}`}>
+              <div className={`df-field${shake ? " is-error" : ""}`}>
+                <label className="df-label" htmlFor="df-paper">Paper</label>
+                {pdf ? (
+                  <div className="df-pdfchoice">
+                    <span className="df-pdfname">{pdfTitle || pdf.name}</span>
+                    <button className="df-link" type="button" onClick={() => { setPdf(null); setPdfTitle(null); }}>
+                      remove
+                    </button>
+                  </div>
+                ) : (
+                  <input
+                    id="df-paper"
+                    className="df-input"
+                    value={val}
+                    onChange={(e) => setVal(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && hasPaper) {
+                        (document.getElementById("df-email") as HTMLInputElement)?.focus();
+                      }
+                    }}
+                    placeholder="arXiv URL or ID"
+                    spellCheck={false}
+                    autoComplete="off"
+                  />
+                )}
+                {identity && !pdf && (
+                  <p className="df-meta">
+                    <span className="df-arrow" aria-hidden="true">→</span>
+                    <b>{identState === "loading" ? "found it —" : identity}</b>
+                  </p>
+                )}
+              </div>
+              {!hasPaper && (
+                <button className="df-pdfbtn" type="button" onClick={() => fileRef.current?.click()}>
+                  <span aria-hidden="true">↥</span> Upload PDF
+                </button>
               )}
             </div>
 
@@ -421,17 +434,13 @@ export default function DeckForge() {
               </div>
             )}
 
-            <div className="df-actions">
-              {hasPaper ? (
+            {hasPaper && (
+              <div className="df-actions">
                 <button className="df-go" type="button" onClick={generate} disabled={!canGen}>
                   Forge deck <span className="df-go-arrow" aria-hidden="true">→</span>
                 </button>
-              ) : (
-                <button className="df-pdfbtn" type="button" onClick={() => fileRef.current?.click()}>
-                  <span aria-hidden="true">↥</span> Upload PDF
-                </button>
-              )}
-            </div>
+              </div>
+            )}
           </>
         )
       ) : (

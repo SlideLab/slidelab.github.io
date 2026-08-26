@@ -9,67 +9,51 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1.05rem;
+  gap: 1.25rem;
   min-width: 0;
   max-width: 100%;
-  padding: 1.35rem clamp(2rem, 4vw, 3.25rem) 1.55rem;
+  padding: 1.3rem 0 1.45rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--rule-mid);
   font-family: var(--sans);
 }
-/* Typographic enclosure: containment without a rectangular card. */
-.deck-forge::before {
-  content: "(";
-  position: absolute;
-  left: -0.06em;
-  top: 50%;
-  z-index: 0;
-  color: color-mix(in srgb, var(--signal) 34%, var(--rule));
-  font-family: var(--serif);
-  font-size: clamp(13rem, 24vw, 20rem);
-  font-weight: 400;
-  line-height: 0.5;
-  transform: translate(-38%, -50%) scaleX(0.42) scaleY(1.18);
-  transform-origin: center;
-  pointer-events: none;
-}
-.deck-forge::after {
-  content: ")";
-  position: absolute;
-  right: -0.06em;
-  top: 50%;
-  z-index: 0;
-  color: color-mix(in srgb, var(--signal) 34%, var(--rule));
-  font-family: var(--serif);
-  font-size: clamp(13rem, 24vw, 20rem);
-  font-weight: 400;
-  line-height: 0.5;
-  transform: translate(38%, -50%) scaleX(0.42) scaleY(1.18);
-  transform-origin: center;
-  pointer-events: none;
-}
-.deck-forge > * { position: relative; z-index: 1; }
 
 /* mode toggle ----------------------------------------------- */
-.df-tabs {
+.df-topline {
   display: flex;
-  gap: 1.4rem;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
   border-bottom: 1px solid var(--rule);
 }
+.df-tabs {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.65rem;
+}
 .df-tab {
-  font-family: var(--mono);
-  font-size: 0.8rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0;
   color: var(--ink-faint);
   background: none;
   border: 0;
-  padding: 0 0 0.55rem;
+  padding: 0 0 0.72rem;
   margin-bottom: -1px;
   border-bottom: 2px solid transparent;
   cursor: pointer;
   transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease);
 }
 .df-tab:hover { color: var(--ink-soft); }
-.df-tab.is-active { color: var(--ink); border-bottom-color: var(--signal); }
+.df-tab.is-active { color: var(--ink); border-bottom-color: var(--signal); font-weight: 600; }
+.df-runtime {
+  flex: 0 0 auto;
+  padding-top: 0.05rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--ink-faint);
+}
 
 /* headline ------------------------------------------------- */
 .df-q {
@@ -81,21 +65,29 @@
   letter-spacing: -0.008em;
   color: var(--ink);
 }
+.df-intro { display: flex; flex-direction: column; gap: 0.35rem; }
 .df-sub {
-  margin: 0.4rem 0 0;
-  font-size: var(--t-small);
+  margin: 0;
+  font-size: 0.96rem;
   line-height: 1.5;
   color: var(--ink-soft);
 }
 
 /* fields ---------------------------------------------------- */
+.df-source-picker {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1rem;
+}
+.df-source-picker.has-paper { grid-template-columns: 1fr; }
 .df-field { display: flex; flex-direction: column; gap: 0.35rem; }
 .df-label {
   font-family: var(--sans);
   font-size: 0.88rem;
   font-weight: 600;
   line-height: 1.2;
-  color: var(--ink-soft);
+  color: var(--ink);
 }
 .df-input,
 .df-email,
@@ -107,7 +99,7 @@
   border: 0;
   border-bottom: 2px solid var(--rule-mid);
   outline: 0;
-  padding: 0.5em 0.1em;
+  padding: 0.62em 0.1em 0.7em;
   width: 100%;
   caret-color: var(--signal);
   transition: border-color var(--dur) var(--ease);
@@ -141,7 +133,7 @@
 
 /* live paper title — confirms "found it," shows no slide ----- */
 .df-meta {
-  margin: 0.3rem 0 0;
+  margin: 0.4rem 0 0;
   font-family: var(--serif);
   font-style: italic;
   font-size: var(--t-small);
@@ -157,7 +149,8 @@
 .df-reveal {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
+  gap: 0.6rem;
+  padding-top: 0.1rem;
   animation: df-fade 0.35s var(--ease);
 }
 .df-payoff {
@@ -172,7 +165,7 @@
 .df-actions {
   display: flex;
   align-items: center;
-  gap: 0.8rem;
+  gap: 0.9rem;
   flex-wrap: wrap;
 }
 /* Upload PDF — clear secondary chip */
@@ -180,18 +173,17 @@
   font-family: var(--sans);
   font-size: var(--t-body);
   font-weight: 600;
-  color: var(--signal-dark);
+  color: var(--ink);
   background: transparent;
-  border: 1px solid var(--signal);
-  border-bottom-width: 3px;
-  padding: 0.64em 1.05em;
+  border: 1px solid var(--ink);
+  padding: 0.68em 1.05em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 0.45ch;
   transition: background var(--dur) var(--ease);
 }
-.df-pdfbtn:hover { background: var(--signal-wash); }
+.df-pdfbtn:hover { border-color: var(--signal); color: var(--signal-dark); }
 /* Generate — the primary CTA (solid signal) */
 .df-go {
   font-family: var(--sans);
@@ -200,7 +192,7 @@
   color: var(--paper);
   background: var(--signal);
   border: 0;
-  padding: 0.62em 1.25em;
+  padding: 0.72em 1.3em;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -349,7 +341,7 @@
 }
 
 @media (max-width: 600px) {
-  .deck-forge { padding-inline: 1.35rem; }
-  .deck-forge::before,
-  .deck-forge::after { opacity: 0.72; }
+  .deck-forge { padding-block: 1.15rem 1.3rem; }
+  .df-source-picker { grid-template-columns: 1fr; align-items: stretch; }
+  .df-pdfbtn { justify-self: start; }
 }
