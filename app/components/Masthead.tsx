@@ -77,9 +77,14 @@ export default function Masthead() {
           })}
         </nav>
 
-        <a className="masthead-paper" href={site.links.annotation} target="_blank" rel="noreferrer">
-          Annotate decks <span aria-hidden="true">&#8599;</span>
-        </a>
+        <div className="masthead-actions" aria-label="Try SlideLab">
+          <a className="masthead-demo" href="#demo">
+            Demo <span aria-hidden="true">&#8595;</span>
+          </a>
+          <a className="masthead-annotate" href={site.links.annotation} target="_blank" rel="noreferrer">
+            Rate decks <span aria-hidden="true">&#8599;</span>
+          </a>
+        </div>
       </div>
     </header>
   );

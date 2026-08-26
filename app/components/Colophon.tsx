@@ -20,9 +20,7 @@ export default function Colophon() {
 }`}
             </pre>
             <p className="colophon-note">
-              Every figure, table, and number on this site is taken from the submitted
-              manuscript and its appendix. You can contribute to the ongoing blind
-              evaluation through the public annotation platform.
+              Every figure, table, and number comes from the manuscript and appendix.
             </p>
           </div>
 
@@ -41,7 +39,7 @@ export default function Colophon() {
               <span className="label">Human evaluation</span>
               <p>
                 <a href={site.links.annotation} target="_blank" rel="noreferrer">
-                  Blind-annotate presentation decks
+                  Rate decks
                 </a>
               </p>
             </div>

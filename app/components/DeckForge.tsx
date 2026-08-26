@@ -296,6 +296,7 @@ export default function DeckForge() {
 
   return (
     <div
+      id="demo"
       className={`deck-forge${drag ? " is-drag" : ""}${shake ? " is-shake" : ""}`}
       onDragOver={(e) => {
         e.preventDefault();
