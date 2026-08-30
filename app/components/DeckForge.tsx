@@ -35,6 +35,14 @@ const cleanPdf = (s: string) =>
 const decodeXml = (s: string) =>
   s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&");
 
+const formatLocalTime = (timestamp: string) => {
+  const hasTimezone = /(?:Z|[+-]\d{2}:?\d{2})$/i.test(timestamp);
+  const date = new Date(hasTimezone ? timestamp : `${timestamp}Z`);
+  return Number.isNaN(date.getTime())
+    ? timestamp
+    : date.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" });
+};
+
 async function readPdfTitle(file: File): Promise<string | null> {
   try {
     const text = new TextDecoder("latin1").decode(new Uint8Array(await file.arrayBuffer()));
@@ -491,7 +499,7 @@ export default function DeckForge() {
                 <li key={j.id} className="df-job">
                   <div className="df-job-main">
                     <span className="df-job-title">{j.title || (j.source === "pdf" ? j.pdf_filename : `arXiv:${j.arxiv_id}`) || "Untitled"}</span>
-                    <span className="df-job-meta">{j.created_at ? new Date(j.created_at).toLocaleString() : ""}</span>
+                    <span className="df-job-meta">{j.created_at ? formatLocalTime(j.created_at) : ""}</span>
                   </div>
                   <span className={`df-badge df-badge--${j.status}`}>{j.status}</span>
                   {j.view_url ? (
