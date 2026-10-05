@@ -2,7 +2,6 @@
    Site-wide configuration.
    Every number here is taken from the submitted manuscript.
    The table it comes from is named in the comment beside it.
-   TODO(launch): add the code and demo URLs after the review period.
    ============================================================ */
 
 export const site = {
@@ -17,13 +16,13 @@ export const site = {
     { name: "Yuxia Wang", url: "https://yuxiaw.github.io", image: "/img/authors/yuxia-wang.jpg" },
   ],
   links: {
-    paper: "/exhibits/SlideLab.pdf",
-    code: "",
+    paper: "https://arxiv.org/abs/2609.30294",
+    code: "https://github.com/insait-institute/SlideLab",
     demo: "https://slidegen.103-127-146-98.nip.io",
     annotation: "https://annotate.103-127-146-98.nip.io",
   },
   release: {
-    code: "Released after the review period",
+    code: "Available on GitHub",
     data: "Released after the review period",
   },
   decks: [

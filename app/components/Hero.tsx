@@ -23,7 +23,9 @@ export default function Hero() {
             Rate decks <span aria-hidden="true">&#8599;</span>
           </a>
           {site.links.code ? (
-            <a href={site.links.code}>Code</a>
+            <a className="primary-link" href={site.links.code} target="_blank" rel="noreferrer">
+              GitHub / Code <span aria-hidden="true">&#8599;</span>
+            </a>
           ) : (
             <span>Code &middot; {site.release.code}</span>
           )}
