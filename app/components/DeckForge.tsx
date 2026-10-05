@@ -84,6 +84,7 @@ export default function DeckForge() {
   const [identity, setIdentity] = useState<string | null>(null);
   const [identState, setIdentState] = useState<"idle" | "loading" | "ok">("idle");
   const [phase, setPhase] = useState<Phase>("idle");
+  const [generationError, setGenerationError] = useState<string | null>(null);
   const [stage, setStage] = useState("queued");
   const [jobId, setJobId] = useState<string | null>(null);
   const [pin, setPin] = useState<string | null>(null);
@@ -153,6 +154,7 @@ export default function DeckForge() {
             setPhase("done");
           } else if (j.status === "error") {
             stop();
+            setGenerationError("Generation failed. Please try again or contact us if it persists.");
             setPhase("error");
           }
         } catch {
@@ -174,12 +176,14 @@ export default function DeckForge() {
         return;
       }
       setPhase("working");
+      setGenerationError(null);
       setStage("queued");
       setPin(null);
       try {
         const r = await fetch(`${API}/submit`, { method: "POST", body });
         const j = await r.json();
         if (!r.ok || !j.job_id) {
+          setGenerationError(j.error || "The request could not be accepted. Please try again.");
           setPhase("error");
           setShake(true);
           return;
@@ -189,6 +193,7 @@ export default function DeckForge() {
         setEmailSent(!!j.email_sent);
         await poll(j.job_id);
       } catch {
+        setGenerationError("Could not reach the generation service. Please check your connection and try again.");
         setPhase("error");
         setShake(true);
       }
@@ -260,6 +265,7 @@ export default function DeckForge() {
   const resetGen = useCallback(() => {
     stop();
     setPhase("idle");
+    setGenerationError(null);
     setStage("queued");
     setJobId(null);
     setPin(null);
@@ -368,7 +374,7 @@ export default function DeckForge() {
             {phase === "error" && (
               <div className="df-result">
                 <p className="df-err">
-                  {API ? "That didn’t generate. Try again." : "The public demo API has not been configured."}
+                  {API ? (generationError || "That didn’t generate. Try again.") : "The public demo API has not been configured."}
                 </p>
                 <button className="df-link" type="button" onClick={resetGen}>
                   retry
