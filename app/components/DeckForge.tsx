@@ -176,7 +176,7 @@ export default function DeckForge() {
           pending = false;
         }
       };
-      timer.current = setInterval(tick, 2500);
+      timer.current = setInterval(tick, 1000);
       await tick();
     },
     [stop]
