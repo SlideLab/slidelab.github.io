@@ -8,6 +8,7 @@ import {
   type ChangeEvent,
   type DragEvent,
 } from "react";
+import LiveDeckPreview, { type DeckProgress } from "./LiveDeckPreview";
 
 const WEBAPP =
   process.env.NEXT_PUBLIC_SLIDEGEN_API ||
@@ -86,12 +87,14 @@ export default function DeckForge() {
   const [phase, setPhase] = useState<Phase>("idle");
   const [generationError, setGenerationError] = useState<string | null>(null);
   const [stage, setStage] = useState("queued");
+  const [progress, setProgress] = useState<DeckProgress | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
   const [pin, setPin] = useState<string | null>(null);
   const [emailSent, setEmailSent] = useState(false);
   const [drag, setDrag] = useState(false);
   const [shake, setShake] = useState(false);
   const timer = useRef<ReturnType<typeof setInterval> | null>(null);
+  const pollEpoch = useRef(0);
   const fileRef = useRef<HTMLInputElement>(null);
 
   // my decks
@@ -108,6 +111,7 @@ export default function DeckForge() {
   const busy = phase === "working" || phase === "done";
 
   const stop = useCallback(() => {
+    pollEpoch.current += 1;
     if (timer.current) {
       clearInterval(timer.current);
       timer.current = null;
@@ -144,10 +148,19 @@ export default function DeckForge() {
 
   const poll = useCallback(
     async (jid: string) => {
+      stop();
+      const epoch = pollEpoch.current;
+      let pending = false;
       const tick = async () => {
+        if (pending) return;
+        pending = true;
         try {
-          const r = await fetch(`${API}/status/${jid}`);
+          let r = await fetch(`${API}/progress/${jid}`, { cache: "no-store", signal: AbortSignal.timeout(15000) });
+          if (!r.ok) r = await fetch(`${API}/status/${jid}`, { cache: "no-store", signal: AbortSignal.timeout(15000) });
+          if (!r.ok) return;
           const j = await r.json();
+          if (pollEpoch.current !== epoch) return;
+          if (Array.isArray(j.slides)) setProgress(j);
           setStage(j.status || "queued");
           if (j.status === "done") {
             stop();
@@ -159,11 +172,12 @@ export default function DeckForge() {
           }
         } catch {
           /* keep polling */
+        } finally {
+          pending = false;
         }
       };
-      await tick();
-      stop();
       timer.current = setInterval(tick, 2500);
+      await tick();
     },
     [stop]
   );
@@ -179,6 +193,7 @@ export default function DeckForge() {
       setGenerationError(null);
       setStage("queued");
       setPin(null);
+      setProgress(null);
       try {
         const r = await fetch(`${API}/submit`, { method: "POST", body });
         const j = await r.json();
@@ -311,7 +326,7 @@ export default function DeckForge() {
   return (
     <div
       id="demo"
-      className={`deck-forge${drag ? " is-drag" : ""}${shake ? " is-shake" : ""}`}
+      className={`deck-forge${drag ? " is-drag" : ""}${shake ? " is-shake" : ""}${progress && (phase === "working" || phase === "done") ? " has-live" : ""}`}
       onDragOver={(e) => {
         e.preventDefault();
         if (!busy && mode === "gen") setDrag(true);
@@ -336,7 +351,8 @@ export default function DeckForge() {
             <h2 className="df-q">Forging your deck.</h2>
             {phase === "working" && (
               <div className="df-result">
-                <span className="df-status">{STAGE[stage] ?? "working"}</span>
+                <span className="df-status">{progress?.label || STAGE[stage] || "working"}</span>
+                {progress && <LiveDeckPreview progress={progress} api={API} />}
                 <p className="df-aside">
                   We&rsquo;ll email <b>{email}</b> when it&rsquo;s ready. You can close this tab and return through &ldquo;My decks&rdquo;.
                 </p>
@@ -356,6 +372,7 @@ export default function DeckForge() {
             {phase === "done" && jobId && (
               <div className="df-result">
                 <p className="df-ok">Your deck is ready{emailSent ? " — check your email" : ""}.</p>
+                {progress && <LiveDeckPreview progress={progress} api={API} />}
                 <a className="df-open" href={`${WEBAPP}/view/${jobId}/`} target="_blank" rel="noreferrer">
                   Open the deck <span aria-hidden="true">↗</span>
                 </a>
@@ -510,6 +527,11 @@ export default function DeckForge() {
                   <span className={`df-badge df-badge--${j.status}`}>{j.status}</span>
                   {j.view_url ? (
                     <a className="df-open" href={j.view_url} target="_blank" rel="noreferrer">open <span aria-hidden="true">↗</span></a>
+                  ) : ["queued", "downloading", "extracting", "generating"].includes(j.status || "") && j.id ? (
+                    <button className="df-link" type="button" onClick={() => {
+                      setEmail(mEmail); setPin(mPin); setJobId(j.id!); setProgress(null);
+                      setPhase("working"); setMode("gen"); poll(j.id!);
+                    }}>watch live</button>
                   ) : null}
                 </li>
               ))}
