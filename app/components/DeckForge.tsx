@@ -64,6 +64,7 @@ async function readPdfTitle(file: File): Promise<string | null> {
 
 type Job = {
   id?: string;
+  access_token?: string;
   title?: string | null;
   arxiv_id?: string;
   pdf_filename?: string;
@@ -89,6 +90,7 @@ export default function DeckForge() {
   const [stage, setStage] = useState("queued");
   const [progress, setProgress] = useState<DeckProgress | null>(null);
   const [jobId, setJobId] = useState<string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
   const [pin, setPin] = useState<string | null>(null);
   const [emailSent, setEmailSent] = useState(false);
   const [drag, setDrag] = useState(false);
@@ -147,7 +149,7 @@ export default function DeckForge() {
   }, [id, mode, phase]);
 
   const poll = useCallback(
-    async (jid: string) => {
+    async (jid: string, token?: string) => {
       stop();
       const epoch = pollEpoch.current;
       let pending = false;
@@ -155,8 +157,9 @@ export default function DeckForge() {
         if (pending) return;
         pending = true;
         try {
-          let r = await fetch(`${API}/progress/${jid}`, { cache: "no-store", signal: AbortSignal.timeout(15000) });
-          if (!r.ok) r = await fetch(`${API}/status/${jid}`, { cache: "no-store", signal: AbortSignal.timeout(15000) });
+          const headers: HeadersInit = token ? { Authorization: `Bearer ${token}` } : {};
+          let r = await fetch(`${API}/progress/${jid}`, { headers, cache: "no-store", signal: AbortSignal.timeout(15000) });
+          if (!r.ok) r = await fetch(`${API}/status/${jid}`, { headers, cache: "no-store", signal: AbortSignal.timeout(15000) });
           if (!r.ok) return;
           const j = await r.json();
           if (pollEpoch.current !== epoch) return;
@@ -204,9 +207,10 @@ export default function DeckForge() {
           return;
         }
         setJobId(j.job_id);
+        setAccessToken(j.access_token || null);
         setPin(j.pin || null);
         setEmailSent(!!j.email_sent);
-        await poll(j.job_id);
+        await poll(j.job_id, j.access_token);
       } catch {
         setGenerationError("Could not reach the generation service. Please check your connection and try again.");
         setPhase("error");
@@ -283,6 +287,7 @@ export default function DeckForge() {
     setGenerationError(null);
     setStage("queued");
     setJobId(null);
+    setAccessToken(null);
     setPin(null);
     setPdf(null);
     setPdfTitle(null);
@@ -373,7 +378,7 @@ export default function DeckForge() {
               <div className="df-result">
                 <p className="df-ok">Your deck is ready{emailSent ? " — check your email" : ""}.</p>
                 {progress && <LiveDeckPreview progress={progress} api={API} />}
-                <a className="df-open" href={`${WEBAPP}/view/${jobId}/`} target="_blank" rel="noreferrer">
+                <a className="df-open" href={`${WEBAPP}/view/${jobId}/${accessToken ? `${accessToken}/` : ""}`} target="_blank" rel="noreferrer">
                   Open the deck <span aria-hidden="true">↗</span>
                 </a>
                 {pin && (
@@ -529,8 +534,8 @@ export default function DeckForge() {
                     <a className="df-open" href={j.view_url} target="_blank" rel="noreferrer">open <span aria-hidden="true">↗</span></a>
                   ) : ["queued", "downloading", "extracting", "generating"].includes(j.status || "") && j.id ? (
                     <button className="df-link" type="button" onClick={() => {
-                      setEmail(mEmail); setPin(mPin); setJobId(j.id!); setProgress(null);
-                      setPhase("working"); setMode("gen"); poll(j.id!);
+                      setEmail(mEmail); setPin(mPin); setJobId(j.id!); setAccessToken(j.access_token || null); setProgress(null);
+                      setPhase("working"); setMode("gen"); poll(j.id!, j.access_token);
                     }}>watch live</button>
                   ) : null}
                 </li>
