@@ -26,7 +26,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          NEXT_PUBLIC_SLIDEGEN_API: https://slidegen.103-127-146-98.nip.io
+          NEXT_PUBLIC_SLIDEGEN_API: https://slides.eigenlabs.online
       - uses: actions/upload-pages-artifact@v3
         with:
           path: out
