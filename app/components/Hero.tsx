@@ -5,6 +5,7 @@ import HeroEvidence from "./HeroEvidence";
 
 export default function Hero() {
   return (
+    <>
     <header className="hero" id="top">
       <div className="hero-copy">
         <h1 className="hero-title">{site.title}</h1>
@@ -33,8 +34,17 @@ export default function Hero() {
         </div>
       </div>
 
-      <DeckForge />
       <HeroEvidence />
     </header>
+    <section className="demo-section" aria-labelledby="demo-section-title">
+      <div className="demo-section-inner">
+        <div className="demo-copy">
+          <h2 id="demo-section-title">Try it on your own paper</h2>
+          <p>Paste an arXiv link or upload a PDF. SlideLab plans the talk, builds about 14 slides, checks them against the paper, and emails you the deck, usually in about 12 minutes.</p>
+        </div>
+        <DeckForge />
+      </div>
+    </section>
+    </>
   );
 }
