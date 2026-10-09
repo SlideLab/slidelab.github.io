@@ -12,6 +12,7 @@
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(430px, 0.86fr);
   gap: clamp(2.5rem, 6vw, 6rem);
+  row-gap: 2.25rem;
   align-items: center;
   background: var(--page);
 }
@@ -118,6 +119,7 @@
 .hero-links {
   margin: 1.6rem 0 0;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1.2rem;
   font-size: 1rem;
@@ -161,6 +163,114 @@
 }
 
 .hero-links > span { color: var(--ink-faint); }
+
+.hero-evidence {
+  grid-column: 1 / -1;
+  min-width: 0;
+  margin: 0;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--rule-mid);
+}
+
+.hero-evidence-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.hero-evidence-grid > div { min-width: 0; }
+
+.hero-evidence h2 {
+  margin: 0 0 0.55rem;
+  color: var(--ink-soft);
+  font-family: var(--sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.hero-evidence-headline {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin: 0 0 1rem;
+  color: var(--ink);
+  font-size: 0.96rem;
+  line-height: 1.25;
+}
+
+.hero-evidence-headline strong {
+  color: var(--signal);
+  font-family: var(--display);
+  font-size: clamp(1.85rem, 2.4vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  font-variant-numeric: tabular-nums;
+}
+
+.hero-preference-bar {
+  height: 9px;
+  background: var(--rule-mid);
+}
+
+.hero-preference-bar > span { display: block; height: 100%; background: var(--signal); }
+
+.hero-preference-legend {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.75rem;
+  margin-top: 0.6rem;
+  font-size: 0.76rem;
+}
+
+.hero-preference-legend > span { display: inline-flex; align-items: center; gap: 0.3rem; }
+.hero-preference-legend i { width: 6px; height: 6px; background: var(--signal); }
+.hero-preference-legend > span + span i { background: var(--rule-mid); }
+.hero-preference-legend b { font-weight: 600; }
+
+.hero-evidence-row {
+  display: grid;
+  grid-template-columns: 6.1rem minmax(0, 1fr) 4rem;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.6rem;
+  color: var(--ink-soft);
+  font-size: 0.74rem;
+  line-height: 1.4;
+}
+
+.hero-evidence-row.is-ours { color: var(--signal-dark); font-weight: 600; }
+.hero-evidence-track { display: block; height: 6px; }
+.hero-evidence-track > span { display: block; height: 100%; background: var(--rule-mid); }
+.is-ours .hero-evidence-track > span { background: var(--signal); }
+.hero-evidence-measure { text-align: right; font-family: var(--mono); font-size: 0.72rem; }
+.hero-evidence-note { margin: 0.55rem 0 0; color: var(--ink-soft); font-size: 0.72rem; line-height: 1.5; }
+.hero-evidence-scope { margin: 0.6rem 0 0; color: var(--ink-soft); font-size: 0.71rem; line-height: 1.5; }
+
+.hero-evidence figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  color: var(--ink-soft);
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+.hero-evidence figcaption a { flex-shrink: 0; }
+
+@media (max-width: 850px) {
+  .hero-evidence-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem 2rem; }
+  .hero-evidence-study { grid-column: 1 / -1; }
+}
+
+@media (max-width: 480px) {
+  .hero-evidence-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  .hero-evidence figcaption { flex-direction: column; }
+  .hero-evidence-comparison { padding-top: 1.25rem; border-top: 1px solid var(--rule); }
+}
 
 /* ---------- the ballot: the preference study as an artifact ---------- */
 

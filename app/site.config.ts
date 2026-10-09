@@ -157,7 +157,7 @@ export const cost = {
     { stage: "Visual Generator + Compositor", seconds: 261, dollars: 0.42, tokens: 0.32 },
     { stage: "LayoutDebugger", seconds: 122, dollars: 0.03, tokens: 0.05 },
   ],
-  total: { seconds: 744, dollars: 0.58, tokens: 0.69 },
+  total: { seconds: 743, dollars: 0.58, tokens: 0.69 },
   deepPresenter: { seconds: 1620, dollars: 2.1, tokens: 2.9 },
 } as const;
 

@@ -1,6 +1,7 @@
 import { site } from "../site.config";
 import AuthorPreviews from "./AuthorPreviews";
 import DeckForge from "./DeckForge";
+import HeroEvidence from "./HeroEvidence";
 
 export default function Hero() {
   return (
@@ -33,6 +34,7 @@ export default function Hero() {
       </div>
 
       <DeckForge />
+      <HeroEvidence />
     </header>
   );
 }
