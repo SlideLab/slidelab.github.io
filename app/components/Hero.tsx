@@ -8,14 +8,14 @@ export default function Hero() {
     <>
     <header className="hero" id="top">
       <div className="hero-copy">
-        <div className="hero-brand-row" aria-label="INSAIT and SlideLab">
+        <div className="hero-brand-row" aria-label="INSAIT and CoralBricks">
           <a className="hero-insait-logo" href="https://insait.ai/" target="_blank" rel="noreferrer">
             <img src="/img/insait-logo.webp" alt="INSAIT — Institute for Computer Science, Artificial Intelligence and Technology" width="540" height="291" decoding="async" />
           </a>
-          <span className="hero-slidelab-logo">
-            <img src="/img/slidelab-mark.svg" alt="" width="40" height="30" aria-hidden="true" />
-            <span>SlideLab</span>
-          </span>
+          <a className="hero-coralbricks-logo" href={coralBricksTiming.url} target="_blank" rel="noreferrer">
+            <img src="https://www.coralbricks.ai/logo-icon.svg" alt="" width="34" height="37" aria-hidden="true" />
+            <span>CoralBricks</span>
+          </a>
         </div>
         <h1 className="hero-title">{site.title}</h1>
         <AuthorPreviews authors={site.authors} />
