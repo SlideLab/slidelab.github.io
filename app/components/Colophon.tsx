@@ -75,7 +75,7 @@ export default function Colophon() {
           <details>
             <summary>Assumptions &amp; sources</summary>
             <p>
-              <a href="https://omidsaffari.com/blog/gamma-pricing">Plus monthly: $12 / 1,000 credits</a>; <a href="https://developers.gamma.app/get-started/access-and-pricing">3 credits/slide (upper rate)</a>; <a href="https://developers.gamma.app/reference/image-model-accepted-values">20 credits/GPT Image 2 image</a>. Full credit use; no tax/retries. Ratios rounded down.
+              <a href="https://omidsaffari.com/blog/gamma-pricing">Plus monthly: $12 / 1,000 credits</a>; <a href="https://developers.gamma.app/get-started/access-and-pricing">3 credits/slide (upper rate)</a>; <a href="https://developers.gamma.app/reference/image-model-accepted-values">20 credits/GPT Image 2 image</a>. Ratios rounded down.
             </p>
           </details>
         </aside>
