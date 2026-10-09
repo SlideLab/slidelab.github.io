@@ -151,6 +151,8 @@ export const sensitivity = {
 
 /** Appendix Table 10 — average per deck, from production logs. */
 export const cost = {
+  // Current headline estimate; keep the paper's historical stage breakdown below.
+  currentDollars: 0.5,
   stages: [
     { stage: "Planner", seconds: 96, dollars: 0.1, tokens: 0.09 },
     { stage: "Slide Generator", seconds: 264, dollars: 0.03, tokens: 0.23 },
