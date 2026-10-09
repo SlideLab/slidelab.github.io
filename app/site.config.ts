@@ -171,6 +171,12 @@ export const cost = {
   deepPresenter: { seconds: 1620, dollars: 2.1, tokens: 2.9 },
 } as const;
 
+/** Current CoralBricks deployment timing supplied by the authors; separate from Table 10. */
+export const coralBricksTiming = {
+  seconds: 300,
+  url: "https://www.coralbricks.ai/",
+} as const;
+
 /** Gamma Plus monthly allocation estimate, checked 2026-10-09; not a measured bill. */
 const gammaCredits = 20 * 3 + 6 * 20;
 export const gammaComparison = {

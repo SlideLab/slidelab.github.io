@@ -9,6 +9,7 @@ import {
   type DragEvent,
 } from "react";
 import LiveDeckPreview, { type DeckProgress } from "./LiveDeckPreview";
+import { coralBricksTiming } from "../site.config";
 
 const WEBAPP =
   process.env.NEXT_PUBLIC_SLIDEGEN_API ||
@@ -468,7 +469,7 @@ export default function DeckForge() {
                   spellCheck={false}
                   autoComplete="email"
                 />
-                <p className="df-payoff">~14 slides · ready in about 10 minutes</p>
+                <p className="df-payoff">~14 slides · ready in about {coralBricksTiming.seconds / 60} minutes</p>
               </div>
             )}
 

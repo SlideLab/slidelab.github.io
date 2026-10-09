@@ -1,4 +1,4 @@
-import { site } from "../site.config";
+import { site, coralBricksTiming } from "../site.config";
 import AuthorPreviews from "./AuthorPreviews";
 import DeckForge from "./DeckForge";
 import HeroEvidence from "./HeroEvidence";
@@ -40,9 +40,14 @@ export default function Hero() {
       <div className="demo-section-inner">
         <div className="demo-copy">
           <h2 id="demo-section-title">Try it on your own paper</h2>
-          <p>Paste an arXiv link or upload a PDF. SlideLab plans the talk, builds about 14 slides, checks them against the paper, and emails you the deck, usually in about 12 minutes.</p>
+          <p>Paste an arXiv link or upload a PDF. SlideLab plans the talk, builds about 14 slides, checks them against the paper, and emails you the deck, usually in about {coralBricksTiming.seconds / 60} minutes with CoralBricks.</p>
         </div>
         <DeckForge />
+        <a className="demo-powered-by" href={coralBricksTiming.url} target="_blank" rel="noreferrer">
+          <span>Powered by</span>
+          <img src="https://www.coralbricks.ai/logo-icon.svg" alt="" width="22" height="24" loading="lazy" />
+          <strong>CoralBricks</strong>
+        </a>
       </div>
     </section>
     </>

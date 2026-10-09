@@ -1,13 +1,15 @@
-import { preference, cost, gammaComparison } from "../site.config";
+import { preference, cost, gammaComparison, coralBricksTiming } from "../site.config";
 
 export default function HeroEvidence() {
   const timeRatio = cost.deepPresenter.seconds / cost.total.seconds;
+  const coralBricksRatio = Math.floor(cost.deepPresenter.seconds / coralBricksTiming.seconds);
   const costRatio = Math.floor(
     Math.min(gammaComparison.estimatedDollars, cost.deepPresenter.dollars) / cost.currentDollars,
   );
   const times = [
-    { name: "SlideLab", value: cost.total.seconds, label: `${(cost.total.seconds / 60).toFixed(1)} min`, ours: true },
-    { name: "DeepPresenter", value: cost.deepPresenter.seconds, label: `${cost.deepPresenter.seconds / 60} min`, ours: false },
+    { name: "SlideLab powered by CoralBricks", value: coralBricksTiming.seconds, label: `${coralBricksTiming.seconds / 60} min`, ours: true, coralBricks: true },
+    { name: "SlideLab", value: cost.total.seconds, label: `${(cost.total.seconds / 60).toFixed(1)} min`, ours: true, coralBricks: false },
+    { name: "DeepPresenter", value: cost.deepPresenter.seconds, label: `${cost.deepPresenter.seconds / 60} min`, ours: false, coralBricks: false },
   ];
   const prices = [
     { name: "SlideLab", value: cost.currentDollars, ours: true },
@@ -36,12 +38,12 @@ export default function HeroEvidence() {
           <div className="hero-metric-detail">
             {times.map((time) => (
               <div className={`hero-comparison${time.ours ? " is-ours" : ""}`} key={time.name}>
-                <span>{time.name}</span>
+                <span>{time.coralBricks ? <>SlideLab powered by <a href={coralBricksTiming.url} target="_blank" rel="noreferrer">CoralBricks</a></> : time.name}</span>
                 <span className="hero-comparison-track" aria-hidden="true"><span style={{ width: `${time.value / cost.deepPresenter.seconds * 100}%` }} /></span>
                 <span className="hero-comparison-value">{time.label}</span>
               </div>
             ))}
-            <p>Average time to generate a full deck</p>
+            <p><strong>{coralBricksRatio}× faster</strong> with <a href={coralBricksTiming.url} target="_blank" rel="noreferrer">CoralBricks</a> vs DeepPresenter</p>
           </div>
         </div>
 
