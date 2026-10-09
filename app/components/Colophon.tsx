@@ -13,10 +13,14 @@ export default function Colophon() {
             <p className="eyebrow">{site.name}</p>
             <h2>Citation</h2>
             <pre className="bibtex">
-{`@inproceedings{slidelab2026,
-  title     = {${site.title}},
-  author    = {${site.authors.map((author) => author.name).join(" and ")}},
-  year      = {2026}
+{`@misc{vats2026slidelabaudiencecenteredscientificslide,
+  title={SlideLab: Audience-Centered Scientific Slide Generation and Evaluation},
+  author={Vidushee Vats and Karun Sharma and Yuxia Wang},
+  year={2026},
+  eprint={2609.30294},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2609.30294},
 }`}
             </pre>
             <p className="colophon-note">
@@ -63,11 +67,17 @@ export default function Colophon() {
         </div>
         <aside className="cost-calculation" id="cost-calculation" tabIndex={-1} aria-label="Cost comparison calculation">
           <p>
-            * Gamma estimate: (20 <a href="https://developers.gamma.app/get-started/access-and-pricing">slides × 3 credits, upper rate</a> + 6 <a href="https://developers.gamma.app/reference/image-model-accepted-values">GPT Image 2 images × 20 credits</a>) × (<a href="https://omidsaffari.com/blog/gamma-pricing">$12 / 1,000 credits · Plus monthly</a>) = ${gammaComparison.estimatedDollars.toFixed(2)}/deck.
+            <strong>* Gamma estimate</strong> (20 slides, 6 GPT Image 2 images): <span className="cost-equation">(20×3 + 6×20) × $12/1,000 = ${gammaComparison.estimatedDollars.toFixed(2)}/deck.</span>
           </p>
           <p>
-            Full credit use; excludes Gamma tax/retries. Gamma ${gammaComparison.estimatedDollars.toFixed(2)} ÷ SlideLab ${cost.currentDollars.toFixed(2)} = {(gammaComparison.estimatedDollars / cost.currentDollars).toFixed(2)}×; <a href={site.links.paper}>DeepPresenter ${cost.deepPresenter.dollars.toFixed(2)}</a> ÷ ${cost.currentDollars.toFixed(2)} = {(cost.deepPresenter.dollars / cost.currentDollars).toFixed(2)}×. Both rounded down to 4×.
+            <strong>DeepPresenter:</strong> <a href={site.links.paper}>${cost.deepPresenter.dollars.toFixed(2)}/deck</a>. Both ≈4× SlideLab’s ${cost.currentDollars.toFixed(2)}.
           </p>
+          <details>
+            <summary>Assumptions &amp; sources</summary>
+            <p>
+              <a href="https://omidsaffari.com/blog/gamma-pricing">Plus monthly: $12 / 1,000 credits</a>; <a href="https://developers.gamma.app/get-started/access-and-pricing">3 credits/slide (upper rate)</a>; <a href="https://developers.gamma.app/reference/image-model-accepted-values">20 credits/GPT Image 2 image</a>. Full credit use; no tax/retries. Ratios rounded down.
+            </p>
+          </details>
         </aside>
       </div>
     </footer>

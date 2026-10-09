@@ -472,6 +472,10 @@
   font-variant-numeric: tabular-nums;
 }
 .cost-calculation p { margin: 0; }
+.cost-calculation .cost-equation { font-variant-numeric: tabular-nums; }
+.cost-calculation details { margin-top: 0.45rem; }
+.cost-calculation summary { width: fit-content; cursor: pointer; }
+.cost-calculation details[open] summary { margin-bottom: 0.35rem; }
 .cost-calculation:target { border-top-color: var(--signal-soft); }
 
 @media (max-width: 800px) { .colophon-grid { grid-template-columns: 1fr; } }

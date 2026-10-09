@@ -24,7 +24,7 @@ export default function HeroEvidence() {
             <strong>{costRatio}×</strong> cheaper
             <sup><a className="cost-footnote-link" href="#cost-calculation" aria-label="Read cost comparison calculation and assumptions">*</a></sup>
           </h2>
-          <p>${cost.currentDollars.toFixed(2)}/deck · vs Gamma &amp; DeepPresenter</p>
+          <p>SlideLab: ${cost.currentDollars.toFixed(2)} per deck<br />vs Gamma &amp; DeepPresenter</p>
         </div>
       </div>
       <figcaption>
