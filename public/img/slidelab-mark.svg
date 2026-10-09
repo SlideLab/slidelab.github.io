@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 48" role="img" aria-label="SlideLab mark">
+  <rect x="2" y="2" width="60" height="44" rx="5" fill="#fbfaf8" stroke="#17181b" stroke-width="3"/>
+  <path d="M2 7a5 5 0 0 1 5-5h50a5 5 0 0 1 5 5v6H2Z" fill="#4436c8"/>
+  <path d="M14 25h25M14 34h18" fill="none" stroke="#17181b" stroke-linecap="round" stroke-width="3"/>
+</svg>
