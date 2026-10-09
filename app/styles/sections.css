@@ -502,6 +502,7 @@
 
 @media (max-width: 1100px) {
   .hero { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .hero-authors { display: flex; flex-wrap: wrap; gap: 0.8rem 1.1rem; }
 }
 
 @media (max-width: 860px) {
@@ -517,6 +518,8 @@
 @media (max-width: 520px) {
   .hero { padding-inline: 1rem; }
   .hero-title { font-size: clamp(2rem, 9.5vw, 2.9rem); overflow-wrap: anywhere; }
+  .hero-authors a { font-size: 0.95rem; }
+  .hero-authors .author-portrait { width: 2.6rem; height: 2.6rem; }
   .ballot-grid { grid-template-columns: repeat(10, 1fr); gap: 0.25rem; }
   .ballot-tally { grid-template-columns: 1fr; gap: 1rem; align-items: start; }
   .artifact-support { grid-template-columns: 1fr; gap: 1rem; }
