@@ -41,7 +41,7 @@ export default function Hero() {
         <div className="demo-copy">
           <a className="demo-powered-by" href={coralBricksTiming.url} target="_blank" rel="noreferrer">
             <img src="https://www.coralbricks.ai/logo-icon.svg" alt="" width="30" height="33" loading="lazy" />
-            <span><span className="demo-sponsor-label">Powered by our sponsor</span><strong>CoralBricks <span aria-hidden="true">↗</span></strong></span>
+            <span><span className="demo-provider-label">Powered by</span><strong>CoralBricks <span aria-hidden="true">↗</span></strong></span>
           </a>
           <h2 id="demo-section-title">Try it on your own paper</h2>
           <p>Paste an arXiv link or upload a PDF. Get a checked, ready-to-present deck by email, usually in about {coralBricksTiming.seconds / 60} minutes with CoralBricks.</p>

@@ -13,7 +13,7 @@ export const site = {
   authors: [
     { name: "Vidushee Vats", url: "https://koookieee.github.io", image: "/img/authors/vidushee-vats.webp" },
     { name: "Karun Sharma", url: "https://anonymous-atom.github.io", image: "/img/authors/karun-sharma.webp" },
-    { name: "Yuxia Wang", url: "https://yuxiaw.github.io", image: "/img/authors/yuxia-wang.jpg" },
+    { name: "Yuxia Wang", url: "https://yuxiaw.github.io", image: "/img/authors/yuxia-wang.webp" },
   ],
   links: {
     paper: "https://arxiv.org/abs/2609.30294",

@@ -243,7 +243,7 @@
 .demo-section .deck-forge { scroll-margin-top: 7rem; }
 .demo-powered-by { display: inline-flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem; padding: 0.25rem 0; border-bottom: 0; color: var(--ink-soft); line-height: 1.3; }
 .demo-powered-by img { display: block; object-fit: contain; }
-.demo-sponsor-label { display: block; margin-bottom: 0.15rem; font-size: 0.8rem; }
+.demo-provider-label { display: block; margin-bottom: 0.15rem; font-size: 0.8rem; }
 .demo-powered-by strong { display: block; color: var(--ink); font-family: var(--display); font-size: 1.2rem; font-weight: 600; }
 .demo-powered-by strong span { color: var(--signal); font-size: 0.9rem; }
 .demo-powered-by:hover strong { color: var(--signal); }

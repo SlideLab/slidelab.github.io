@@ -78,6 +78,8 @@ export default function AuthorPreviews({ authors }: { authors: readonly Author[]
                 alt=""
                 width="72"
                 height="72"
+                loading="eager"
+                decoding="async"
                 aria-hidden="true"
               />
               <span>{author.name}</span>

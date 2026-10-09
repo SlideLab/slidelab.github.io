@@ -46,6 +46,10 @@ export default function SystemChapter() {
         <figure className="system-figure">
           <img
             src="/img/architecture.png"
+            width="4000"
+            height="1417"
+            loading="lazy"
+            decoding="async"
             alt="The SlideLab pipeline. A research paper enters the Planner, which produces a slide blueprint and narration arc. The Generator writes slides section by section, opening visual slots. The Visual Generator fills those slots and the Compositor reorders and verifies the deck. The Layout Debugger renders each slide and applies targeted fixes, producing the presentation and a narration script."
           />
           <figcaption>
