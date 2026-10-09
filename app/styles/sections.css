@@ -195,6 +195,8 @@
 }
 
 .hero-evidence h2 strong { font-weight: 650; }
+.hero-evidence h2 sup { margin-left: 0.15em; font-size: 0.65em; }
+.hero-evidence .cost-footnote-link { padding: 0.2em; color: var(--signal); }
 
 .hero-evidence-grid p {
   margin: 0;

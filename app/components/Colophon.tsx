@@ -1,4 +1,4 @@
-import { site } from "../site.config";
+import { site, cost, gammaComparison } from "../site.config";
 
 /**
  * Colophon — how to cite the work, what is released, and where the
@@ -20,7 +20,8 @@ export default function Colophon() {
 }`}
             </pre>
             <p className="colophon-note">
-              Every figure, table, and number comes from the manuscript and appendix.
+              Research results come from the manuscript and appendix. Current cost
+              comparisons are explained below.
             </p>
           </div>
 
@@ -60,6 +61,14 @@ export default function Colophon() {
             </div>
           </div>
         </div>
+        <aside className="cost-calculation" id="cost-calculation" tabIndex={-1} aria-label="Cost comparison calculation">
+          <p>
+            * Gamma estimate: (20 <a href="https://developers.gamma.app/get-started/access-and-pricing">slides × 3 credits, upper rate</a> + 6 <a href="https://developers.gamma.app/reference/image-model-accepted-values">GPT Image 2 images × 20 credits</a>) × (<a href="https://omidsaffari.com/blog/gamma-pricing">$12 / 1,000 credits · Plus monthly</a>) = ${gammaComparison.estimatedDollars.toFixed(2)}/deck.
+          </p>
+          <p>
+            Full credit use; excludes Gamma tax/retries. Gamma ${gammaComparison.estimatedDollars.toFixed(2)} ÷ SlideLab ${cost.currentDollars.toFixed(2)} = {(gammaComparison.estimatedDollars / cost.currentDollars).toFixed(2)}×; <a href={site.links.paper}>DeepPresenter ${cost.deepPresenter.dollars.toFixed(2)}</a> ÷ ${cost.currentDollars.toFixed(2)} = {(cost.deepPresenter.dollars / cost.currentDollars).toFixed(2)}×. Both rounded down to 4×.
+          </p>
+        </aside>
       </div>
     </footer>
   );

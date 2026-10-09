@@ -65,6 +65,8 @@ export default function DecksChapter() {
                 <div className="deck-preview">
                   <img
                     src={deck.preview}
+                    width={deck.previewWidth}
+                    height={deck.previewHeight}
                     alt={`${deck.previewPage}: ${deck.title}`}
                     loading="lazy"
                   />

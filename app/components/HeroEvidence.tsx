@@ -1,11 +1,13 @@
-import { preference, cost } from "../site.config";
+import { preference, cost, gammaComparison } from "../site.config";
 
 export default function HeroEvidence() {
   const timeRatio = cost.deepPresenter.seconds / cost.total.seconds;
-  const costReduction = Math.round((1 - cost.currentDollars / cost.deepPresenter.dollars) * 100);
+  const costRatio = Math.floor(
+    Math.min(gammaComparison.estimatedDollars, cost.deepPresenter.dollars) / cost.currentDollars,
+  );
 
   return (
-    <figure className="hero-evidence" aria-label="SlideLab benchmark comparisons">
+    <figure className="hero-evidence" aria-label="SlideLab results and estimated cost comparisons">
       <div className="hero-evidence-grid">
         <div>
           <h2><strong>{preference.percent}%</strong> win rate</h2>
@@ -18,8 +20,11 @@ export default function HeroEvidence() {
         </div>
 
         <div>
-          <h2><strong>{costReduction}%</strong> lower cost</h2>
-          <p>Avg. ${cost.currentDollars.toFixed(2)} vs ${cost.deepPresenter.dollars.toFixed(2)} · DeepPresenter</p>
+          <h2>
+            <strong>{costRatio}×</strong> cheaper
+            <sup><a className="cost-footnote-link" href="#cost-calculation" aria-label="Read cost comparison calculation and assumptions">*</a></sup>
+          </h2>
+          <p>${cost.currentDollars.toFixed(2)}/deck · vs Gamma &amp; DeepPresenter</p>
         </div>
       </div>
       <figcaption>

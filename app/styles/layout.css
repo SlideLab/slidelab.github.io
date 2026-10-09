@@ -461,4 +461,17 @@
 .colophon-fact .label { color: #979590; }
 .colophon-fact p { margin: 0.35rem 0 0; color: #d4d2cb; font-size: 0.78rem; line-height: 1.5; }
 
+.cost-calculation {
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #4b4d52;
+  color: #d4d2cb;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  scroll-margin-top: 8rem;
+  font-variant-numeric: tabular-nums;
+}
+.cost-calculation p { margin: 0; }
+.cost-calculation:target { border-top-color: var(--signal-soft); }
+
 @media (max-width: 800px) { .colophon-grid { grid-template-columns: 1fr; } }

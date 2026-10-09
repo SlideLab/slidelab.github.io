@@ -31,6 +31,8 @@ export const site = {
       title: "One paper, four decks",
       note: "SlideLab against DeepPresenter, Kimi Slides, and Manus on the same paper.",
       preview: "/img/slide-comparison.png",
+      previewWidth: 3293,
+      previewHeight: 1602,
       detail: "/img/slide-comparison.png",
       previewPage: "Same paper, four systems",
     },
@@ -39,6 +41,8 @@ export const site = {
       title: "Representative qualitative comparison",
       note: "Supporting the quantitative results reported in the main paper.",
       preview: "/img/comp1.png",
+      previewWidth: 5327,
+      previewHeight: 2638,
       detail: "/img/comp1.png",
       previewPage: "Qualitative comparison 1",
     },
@@ -47,6 +51,8 @@ export const site = {
       title: "Representative qualitative comparison",
       note: "Supporting the quantitative results reported in the main paper.",
       preview: "/img/comp2.png",
+      previewWidth: 5600,
+      previewHeight: 2814,
       detail: "/img/comp2.png",
       previewPage: "Qualitative comparison 2",
     },
@@ -55,6 +61,8 @@ export const site = {
       title: "Representative qualitative comparison",
       note: "Supporting the quantitative results reported in the main paper.",
       preview: "/img/comp3.png",
+      previewWidth: 12390,
+      previewHeight: 6516,
       detail: "/img/comp3.png",
       previewPage: "Qualitative comparison 3",
     },
@@ -161,6 +169,13 @@ export const cost = {
   ],
   total: { seconds: 743, dollars: 0.58, tokens: 0.69 },
   deepPresenter: { seconds: 1620, dollars: 2.1, tokens: 2.9 },
+} as const;
+
+/** Gamma Plus monthly allocation estimate, checked 2026-10-09; not a measured bill. */
+const gammaCredits = 20 * 3 + 6 * 20;
+export const gammaComparison = {
+  credits: gammaCredits,
+  estimatedDollars: gammaCredits * (12 / 1000),
 } as const;
 
 /** Appendix Table 8 — the model behind each stage. */
