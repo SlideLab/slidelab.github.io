@@ -7,7 +7,7 @@ export default function HeroEvidence() {
     Math.min(gammaComparison.estimatedDollars, cost.deepPresenter.dollars) / cost.currentDollars,
   );
   const times = [
-    { name: "SlideLab powered by CoralBricks", value: coralBricksTiming.seconds, label: `${coralBricksTiming.seconds / 60} min`, ours: true, coralBricks: true },
+    { name: "SlideLab + CoralBricks", value: coralBricksTiming.seconds, label: `${coralBricksTiming.seconds / 60} min`, ours: true, coralBricks: true },
     { name: "SlideLab", value: cost.total.seconds, label: `${(cost.total.seconds / 60).toFixed(1)} min`, ours: true, coralBricks: false },
     { name: "DeepPresenter", value: cost.deepPresenter.seconds, label: `${cost.deepPresenter.seconds / 60} min`, ours: false, coralBricks: false },
   ];
@@ -37,8 +37,8 @@ export default function HeroEvidence() {
           <h2><strong>{timeRatio.toFixed(1)}×</strong><span>faster</span></h2>
           <div className="hero-metric-detail">
             {times.map((time) => (
-              <div className={`hero-comparison${time.ours ? " is-ours" : ""}`} key={time.name}>
-                <span>{time.coralBricks ? <>SlideLab powered by <a href={coralBricksTiming.url} target="_blank" rel="noreferrer">CoralBricks</a></> : time.name}</span>
+              <div className={`hero-comparison hero-comparison-timing${time.ours ? " is-ours" : ""}`} key={time.name}>
+                <span>{time.coralBricks ? <>SlideLab + <a href={coralBricksTiming.url} target="_blank" rel="noreferrer">CoralBricks</a></> : time.name}</span>
                 <span className="hero-comparison-track" aria-hidden="true"><span style={{ width: `${time.value / cost.deepPresenter.seconds * 100}%` }} /></span>
                 <span className="hero-comparison-value">{time.label}</span>
               </div>

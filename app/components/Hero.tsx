@@ -39,15 +39,14 @@ export default function Hero() {
     <section className="demo-section" aria-labelledby="demo-section-title">
       <div className="demo-section-inner">
         <div className="demo-copy">
+          <a className="demo-powered-by" href={coralBricksTiming.url} target="_blank" rel="noreferrer">
+            <img src="https://www.coralbricks.ai/logo-icon.svg" alt="" width="30" height="33" loading="lazy" />
+            <span><span className="demo-sponsor-label">Powered by our sponsor</span><strong>CoralBricks <span aria-hidden="true">↗</span></strong></span>
+          </a>
           <h2 id="demo-section-title">Try it on your own paper</h2>
-          <p>Paste an arXiv link or upload a PDF. SlideLab plans the talk, builds about 14 slides, checks them against the paper, and emails you the deck, usually in about {coralBricksTiming.seconds / 60} minutes with CoralBricks.</p>
+          <p>Paste an arXiv link or upload a PDF. Get a checked, ready-to-present deck by email, usually in about {coralBricksTiming.seconds / 60} minutes with CoralBricks.</p>
         </div>
         <DeckForge />
-        <a className="demo-powered-by" href={coralBricksTiming.url} target="_blank" rel="noreferrer">
-          <span>Powered by</span>
-          <img src="https://www.coralbricks.ai/logo-icon.svg" alt="" width="22" height="24" loading="lazy" />
-          <strong>CoralBricks</strong>
-        </a>
       </div>
     </section>
     </>
