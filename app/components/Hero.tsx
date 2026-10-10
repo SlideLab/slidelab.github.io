@@ -10,7 +10,7 @@ export default function Hero() {
       <div className="hero-copy">
         <div className="hero-brand-row" aria-label="INSAIT and CoralBricks">
           <a className="hero-insait-logo" href="https://insait.ai/" target="_blank" rel="noreferrer">
-            <img src="/img/insait-logo.webp" alt="INSAIT — Institute for Computer Science, Artificial Intelligence and Technology" width="540" height="291" decoding="async" />
+            <img src="/img/insait-wordmark.webp" alt="INSAIT — Institute for Computer Science, Artificial Intelligence and Technology" width="456" height="131" decoding="async" />
           </a>
           <a className="hero-coralbricks-logo" href={coralBricksTiming.url} target="_blank" rel="noreferrer">
             <img src="https://www.coralbricks.ai/logo-icon.svg" alt="" width="34" height="37" aria-hidden="true" />
